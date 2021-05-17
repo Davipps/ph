@@ -32,7 +32,7 @@ FormatDialogStrings()
 	return 1;	
 }
 
-getRandomText(const text[], length = sizeof text)
+getRandomText(text[], length = sizeof text)
 {
     for(new i = 0; i != length; i ++)
 	{

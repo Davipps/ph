@@ -1,4 +1,4 @@
-//Debug mode compiler
+//Debug mode comPlayerInfoler
 #pragma option -d2
 
 //MaxPlayers
@@ -90,30 +90,43 @@ public OnPlayerConnect(playerid)
 	return 1;
 }
 
-/* public OnPlayerRequestSpawn(playerid)
+public OnPlayerRequestSpawn(playerid)
 {
 	if(PlayerInfo[playerid][pStatus] == sConnected) CallLocalFunction("OnPlayerRequestClass", "dd", playerid, 0);
 	return 0;
-} */
+}
 
-/* public OnPlayerRequestClass(playerid, classid)
+public OnPlayerRequestClass(playerid, classid)
 {
 	if(PlayerInfo[playerid][pStatus] == sConnected)
 	{
+		TogglePlayerSpectating(playerid, true);
 		new query[250];
 		inline OnPlayerCheck()
 		{
 			new rows;
 			if(cache_get_row_count(rows))
 			{
-				
+				if(rows)
+				{
+					cache_get_value_name(0, "id", PlayerInfo[playerid][pID]);
+					cache_get_value_name(0, "password", PlayerInfo[playerid][pPassword]);
+					cache_get_value_name(0, "salt", PlayerInfo[playerid][pSalt]);
+					ShowPlayerDialogEx(playerid, DIALOG_LOGIN);
+					return 1;
+				}
+				else
+				{
+					ShowPlayerDialogEx(playerid, DIALOG_REGISTER);
+					return 1;
+				}
 			}
 		}
-		mysql_format(Handle, query, sizeof query, "SELECT name, password, salt FROM `player` WHERE `name` = '%e'",PlayerInfo[playerid][pName]);
+		mysql_format(Handle, query, sizeof query, "SELECT id, password, salt FROM `player` WHERE `name` = '%e'",PlayerInfo[playerid][pName]);
 		MySQL_TQueryInline(Handle, using inline OnPlayerCheck, query);
 	}
 	return 0;
-} */
+}
 
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
@@ -126,6 +139,85 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				callcmd::ayuda(playerid, inputtext);
 				return 1;
 			}
+		}
+		case DIALOG_LOGIN:
+		{
+			if(!response) return Kick(playerid);
+			if(!strlen(inputtext)) return ShowPlayerDialogEx(playerid, dialogid);
+			
+			new passhash[64 + 1];
+			SHA256_PassHash(inputtext, PlayerInfo[playerid][pSalt], passhash, sizeof passhash);
+			if(!strcmp(passhash, PlayerInfo[playerid][pPassword], false))
+			{
+				LoadPlayerData(playerid);
+				SetPlayerVirtualWorld(playerid,0);
+				SetPlayerInterior(playerid,0);
+				SetSpawnInfo(playerid, NO_TEAM, PlayerInfo[playerid][pSkin], DefaultPos[0], DefaultPos[1], DefaultPos[2], 0.0, 0, 0, 0, 0, 0, 0);
+				TogglePlayerSpectating(playerid, false);
+				return 1;
+			}
+			return 1;
+		}
+		case DIALOG_REGISTER:
+		{
+			if(strlen(inputtext) < MIN_PASS_LENGTH || strlen(inputtext) > MAX_PASS_LENGTH) return ShowPlayerDialogEx(playerid, dialogid);
+			format(PlayerTemp[playerid][tPassword], 24, "%s", inputtext);
+			
+			new salt[16];
+			getRandomText(salt);
+			format(PlayerInfo[playerid][pSalt], 16, "%s", salt);
+			SHA256_PassHash(inputtext, PlayerInfo[playerid][pSalt], PlayerInfo[playerid][pPassword], 64 + 1);
+			ShowPlayerDialogEx(playerid, DIALOG_REGISTER_EMAIL);
+			return 1;
+		}
+		case DIALOG_REGISTER_EMAIL:
+		{
+			if(!response) return Kick(playerid);
+			new mail[32];
+			format(mail, 32, "%s", inputtext);
+			if(!IsValidEmail(mail))
+			{
+				SendClientMessage(playerid, -1, "Correo no válido.");
+				ShowPlayerDialogEx(playerid, DIALOG_REGISTER_EMAIL);
+				return 1;	
+			}
+
+			inline CheckEmail()
+			{
+				new rows;
+				if(cache_get_row_count(rows))
+				{
+					if(rows)
+					{
+						SendClientMessage(playerid, -1, "Ya existe una cuenta con ese correo.");
+						ShowPlayerDialogEx(playerid, dialogid);
+					}
+					else
+					{
+						format(PlayerInfo[playerid][pEmail], 32, "%s", mail);
+						ShowPlayerDialogEx(playerid, DIALOG_REGISTER_SEX);
+					}
+				}
+				else Kick(playerid);
+			}
+			mysql_format(Handle, QUERY_BUFFER, sizeof QUERY_BUFFER, "SELECT id FROM player WHERE email = '%e';", mail);
+			MySQL_TQueryInline(Handle, using inline CheckEmail, QUERY_BUFFER);
+			return 1;
+		}
+		case DIALOG_REGISTER_SEX:
+		{
+			if(!response) return Kick(playerid);
+			switch(listitem)
+			{
+				case 0: (PlayerInfo[playerid][pGender] = gMale,PlayerInfo[playerid][pSkin]=26);
+				case 1: (PlayerInfo[playerid][pGender] = gFemale,PlayerInfo[playerid][pSkin]=226);
+			}
+			RegisterNewPlayer(playerid);
+			SetPlayerVirtualWorld(playerid,0);
+			SetPlayerInterior(playerid,0);
+			SetSpawnInfo(playerid, NO_TEAM, PlayerInfo[playerid][pSkin], DefaultPos[0], DefaultPos[1], DefaultPos[2], 0.0, 0, 0, 0, 0, 0, 0);
+			TogglePlayerSpectating(playerid, false);
+			return 1;
 		}
 	}
 	return 1;
