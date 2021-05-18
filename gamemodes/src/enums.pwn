@@ -32,7 +32,7 @@ enum e_Gender
 enum e_PlayerInfo
 {
 	pID,
-	pName,
+	pName[24],
 	pPassword[65],
 	pSalt[16],
 	pEmail[32],

@@ -35,16 +35,17 @@ RegisterNewPlayer(playerid)
 			PlayerInfo[playerid][pID] = id;
 		}
 		else Kick(playerid);
-		return 1;
 	}
-
-	mysql_format
-	(
-		Handle, QUERY_BUFFER, sizeof QUERY_BUFFER,
-		"INSERT INTO `player`(`name`, `password`, `salt`, `email`, `gender`) VALUES (%e,%e,%e,%e,%d)",
-		PlayerInfo[playerid][pName],PlayerInfo[playerid][pSalt], PlayerInfo[playerid][pPassword], PlayerInfo[playerid][pEmail], PlayerInfo[playerid][pGender]
+	MySQL_TQueryInline(Handle, using inline OnPlayerInserted, 
+		"\
+			INSERT INTO `player`(`name`, `password`, `salt`, `email`, `gender`) VALUES ('%e','%e','%e','%e',%d)\
+		",
+		PlayerInfo[playerid][pName],
+		PlayerInfo[playerid][pPassword], 
+		PlayerInfo[playerid][pSalt], 
+		PlayerInfo[playerid][pEmail], 
+		PlayerInfo[playerid][pGender]
 	);
-	MySQL_TQueryInline(Handle, using inline OnPlayerInserted, QUERY_BUFFER);
 	return 1;
 }
 
