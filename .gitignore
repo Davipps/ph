@@ -27,9 +27,9 @@ server.cfg
 
 # binaries
 *.exe
-#*.dll
-#*.so
-#*.pdb
+*.dll
+*.so
+*.pdb
 announce
 samp03svr
 samp-npc
