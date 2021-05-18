@@ -4,6 +4,8 @@
 	"entry": "gamemodes\\main.pwn",
 	"output": "gamemodes\\main.amx",
 	"dependencies": [
+		"pawn-lang/pawn-stdlib",
+		"pawn-lang/samp-stdlib",
 		"Zeex/samp-plugin-crashdetect",
 		"samp-incognito/samp-streamer-plugin",
 		"maddinat0r/sscanf",
