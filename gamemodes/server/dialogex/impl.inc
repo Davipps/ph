@@ -1,5 +1,3 @@
-//Callback to format dialogs
-
 forward ShowPlayerDialogEx(playerid, dialogid);
 public ShowPlayerDialogEx(playerid, dialogid)
 {

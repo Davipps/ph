@@ -1,4 +1,33 @@
-//Commands
+#include <YSI_Coding\y_hooks>
+
+hook OnScriptInit()
+{
+	for(new i=0; i < sizeof DialogHelp; i++)
+	{
+		new str[32];
+		format(str, sizeof str, "%c%s\n",toupper(DialogHelp[i][dCommand][0]),DialogHelp[i][dCommand][1]);
+		strcat(DialogHelp_commands, str);
+	}
+	return 1;
+}
+
+hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+    switch(dialogid)
+    {
+		case DIALOG_HELP:
+		{
+			if(response)
+			{
+				callcmd::ayuda(playerid, inputtext);
+				return 1;
+			}
+            return 1;
+		}
+    }
+    return 1;
+}
+
 CMD:ayuda(playerid, params[])
 {
 	new command[10];

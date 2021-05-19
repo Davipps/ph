@@ -21,17 +21,6 @@ ShowDialogInfo(playerid, dialogid, const caption[], const info[])
 	return 1;
 }
 
-FormatDialogStrings()
-{
-	for(new i=0; i < sizeof DialogHelp; i++)
-	{
-		new str[32];
-		format(str, sizeof str, "%c%s\n",toupper(DialogHelp[i][dCommand][0]),DialogHelp[i][dCommand][1]);
-		strcat(DialogHelp_commands, str);
-	}
-	return 1;	
-}
-
 getRandomText(text[], length = sizeof text)
 {
     for(new i = 0; i != length; i ++)
@@ -39,4 +28,15 @@ getRandomText(text[], length = sizeof text)
 		text[i] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
 	}
 	return true;
+}
+
+minrand(min, max) //By Alex "Y_Less" Cole
+{
+	return random(max - min) + min;
+}
+
+SendClientMessageEx(playerid, color, const form[], {Float, _}:...) {
+    new string[145];
+	format(string, sizeof(string), form, ___(3));
+    return (playerid == -1 ? (SendClientMessageToAll(color, string)) : (SendClientMessage(playerid, color, string)) );
 }

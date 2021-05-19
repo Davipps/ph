@@ -2,6 +2,12 @@
 # Package only files
 #
 
+# Pawno
+pawno/
+
+# Config mysql
+db.ini
+
 # Compiled Bytecode
 *.amx
 
