@@ -26,7 +26,9 @@ enum e_PlayerInfo
 	pLevel,
 	Float:pExp,
 	pAreaCrew,
-	pAreaItem
+	pAreaItem,
+	Float:pHungry,
+	Float:pThirst,
 };
 new PlayerInfo[MAX_PLAYERS][e_PlayerInfo];
 

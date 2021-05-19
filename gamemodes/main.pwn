@@ -17,6 +17,7 @@
 #include <streamer>
 #include <sscanf2>
 
+#include <YSI_Visual\y_dialog>
 #include <YSI_Coding\y_inline>
 #include <YSI_Extra\y_inline_mysql>
 #include <YSI_Data\y_iterate>
@@ -43,25 +44,25 @@
 //HEADERS
 
 //-- server
-#include "utils\defines\header.inc"
+#include "utils\header"
 #include "server\db\header"
-#include "server\dialogs\header.inc" //estos id de dialogos talvez cambien por inline dialog que hare proximamente
-#include "server\intro\header.inc"
-#include "server\vehinfo\header.inc"
-#include "server\worldtime\header.inc"
+#include "server\intro\header"
+#include "server\vehinfo\header"
+#include "server\worldtime\header"
 #include "server\items\header.inc"
 #include "server\dropitems\header.inc"
 
 //-- player
-#include "player\pinfo\header.inc"
-#include "player\dialog_help\header.inc"
-#include "player\register\header.inc"
+#include "player\pinfo\header"
+#include "player\dialog_help\header"
+#include "player\login\header"
+#include "player\register\header"
 
 //FUNCS
 
 //-- utils
-#include "utils\functions\funcs.inc"
-#include "server\worldtime\funcs.inc"
+#include "utils\funcs"
+#include "server\worldtime\funcs"
 
 //-- player
 #include "player\register\funcs"
@@ -74,20 +75,18 @@
 
 #include "server\db\impl.inc"
 #include "server\worldtime\impl.inc"
-#include "server\dialogex\impl.inc"
-#include "server\commands\impl.inc"
 #include "server\dropitems\impl.inc"
+#include "server\db\impl"
+#include "server\worldtime\impl"
 
-#include "dev\commands\impl.inc"
+#include "dev\commands\impl"
 
-#include "admin\timers\impl.inc"
+#include "admin\timers\impl"
 
-#include "player\connection\impl.inc"
-#include "player\dialog_help\impl.inc"
-#include "player\login\impl.inc"
-#include "player\register\impl.inc"
-
-#include "test\inline_dialog\impl.inc"
+#include "player\connection\impl"
+#include "player\dialog_help\impl"
+#include "player\login\impl"
+#include "player\register\impl"
 
 timer minconnecttime[60000]()
 {
