@@ -1,27 +1,34 @@
-#include <YSI_Coding\y_hooks>
-
-hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+ShowLogin(playerid)
 {
-    switch(dialogid)
-    {
-        case DIALOG_LOGIN:
+	// Called when the player responds to the dialog.
+	inline const Login(pid, dialogid, response, listitem, string:inputtext[])
+	{
+		#pragma unused pid, dialogid, listitem
+		
+		if (!response || isnull(inputtext))
 		{
-			if(!response) return Kick(playerid);
-			if(!strlen(inputtext)) return ShowPlayerDialogEx(playerid, dialogid);
-			
-			new passhash[64 + 1];
-			SHA256_PassHash(inputtext, PlayerInfo[playerid][pSalt], passhash, sizeof passhash);
-			if(!strcmp(passhash, PlayerInfo[playerid][pPassword], false))
-			{
-				LoadPlayerData(playerid);
-				SetPlayerVirtualWorld(playerid,0);
-				SetPlayerInterior(playerid,0);
-				SetSpawnInfo(playerid, NO_TEAM, PlayerInfo[playerid][pSkin], DefaultPos[0], DefaultPos[1], DefaultPos[2], 0.0, 0, 0, 0, 0, 0, 0);
-				TogglePlayerSpectating(playerid, false);
-				return 1;
-			}
+			SendClientMessage(playerid, -1, "Ingresa un contraseña");
+			ShowLogin(playerid);
 			return 1;
 		}
-    }
-    return 1;
+
+		new password[64+1];
+		SHA256_PassHash(inputtext, PlayerInfo[playerid][pSalt], password, sizeof password);
+		if(!strcmp(password, PlayerInfo[playerid][pPassword], false))
+		{
+			MySQL_TQueryInline(Handle, using callback OnPlayerDataLoad, "SELECT * FROM `player` WHERE `id` = '%d'",PlayerInfo[playerid][pID]);
+			SetPlayerVirtualWorld(playerid,0);
+			SetPlayerInterior(playerid,0);
+			SetSpawnInfo(playerid, NO_TEAM, PlayerInfo[playerid][pSkin], DefaultPos[0], DefaultPos[1], DefaultPos[2], 0.0, 0, 0, 0, 0, 0, 0);
+			TogglePlayerSpectating(playerid, false);
+			return 1;
+		}
+		else //contraseña incorrecta
+		{
+			ShowLogin(playerid);
+		}
+		return 1;
+	}
+	Dialog_ShowCallback(playerid, using inline Login, DIALOG_STYLE_PASSWORD, "INICIAR SESIÓN", "Esta cuenta esta registrada, ingresa tu contraseña", "Siguiente", "Cerrar");
+	return 1;
 }

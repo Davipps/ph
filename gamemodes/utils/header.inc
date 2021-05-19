@@ -1,3 +1,7 @@
+#define DIALOG_INFO 0
+
+new NO_PARAMS[4] = "";
+
 // HOLDING(keys)
 #define HOLDING(%0) \
 	((newkeys & (%0)) == (%0))
@@ -9,9 +13,6 @@
 // RELEASED(keys)
 #define RELEASED(%0) \
 	(((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
-
-
-#define HidePlayerDialog(%1)		ShowPlayerDialog(%1, -1, 0, " ", " ", " ", " ")
 
 //
 enum
