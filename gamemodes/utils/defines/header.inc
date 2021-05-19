@@ -23,3 +23,10 @@ enum
 	MAX_ADMIN_LEVELS
 };
 //
+
+enum _:areaType //Tipos de DynamicAreas del server
+{
+	AREA_TYPE_NONE,
+	AREA_TYPE_ITEM,
+	AREA_TYPE_CREW //para este falta el sistema de clanes XD
+}

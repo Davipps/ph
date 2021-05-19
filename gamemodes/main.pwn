@@ -44,11 +44,13 @@
 
 //-- server
 #include "utils\defines\header.inc"
-#include "server\db\header.inc"
+#include "server\db\header"
 #include "server\dialogs\header.inc" //estos id de dialogos talvez cambien por inline dialog que hare proximamente
 #include "server\intro\header.inc"
 #include "server\vehinfo\header.inc"
 #include "server\worldtime\header.inc"
+#include "server\items\header.inc"
+#include "server\dropitems\header.inc"
 
 //-- player
 #include "player\pinfo\header.inc"
@@ -65,12 +67,16 @@
 #include "player\register\funcs"
 #include "player\login\funcs"
 
+//-- drop items
+#include "server\dropitems\funcs.inc"
+
 //IMPLS
 
 #include "server\db\impl.inc"
 #include "server\worldtime\impl.inc"
 #include "server\dialogex\impl.inc"
 #include "server\commands\impl.inc"
+#include "server\dropitems\impl.inc"
 
 #include "dev\commands\impl.inc"
 

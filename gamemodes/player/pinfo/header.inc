@@ -24,7 +24,9 @@ enum e_PlayerInfo
 	e_pStatus:pStatus,
 	pSkin,
 	pLevel,
-	Float:pExp
+	Float:pExp,
+	pAreaCrew,
+	pAreaItem
 };
 new PlayerInfo[MAX_PLAYERS][e_PlayerInfo];
 
