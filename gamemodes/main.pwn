@@ -44,42 +44,42 @@
 //HEADERS
 
 //-- server
-#include "utils\header.inc"
-#include "server\db\header.inc"
-#include "server\intro\header.inc"
-#include "server\vehinfo\header.inc"
-#include "server\worldtime\header.inc"
+#include "utils\header"
+#include "server\db\header"
+#include "server\intro\header"
+#include "server\vehinfo\header"
+#include "server\worldtime\header"
 
 //-- player
-#include "player\pinfo\header.inc"
-#include "player\dialog_help\header.inc"
-#include "player\login\header.inc"
-#include "player\register\header.inc"
+#include "player\pinfo\header"
+#include "player\dialog_help\header"
+#include "player\login\header"
+#include "player\register\header"
 
 //FUNCS
 
 //-- utils
-#include "utils\funcs.inc"
-#include "server\worldtime\funcs.inc"
+#include "utils\funcs"
+#include "server\worldtime\funcs"
 
 //-- player
-#include "player\register\funcs.inc"
-#include "player\login\funcs.inc"
+#include "player\register\funcs"
+#include "player\login\funcs"
 
 //IMPLS
 
-#include "server\db\impl.inc"
-#include "server\worldtime\impl.inc"
-#include "server\commands\impl.inc"
+#include "server\db\impl"
+#include "server\worldtime\impl"
+#include "server\commands\impl"
 
-#include "dev\commands\impl.inc"
+#include "dev\commands\impl"
 
-#include "admin\timers\impl.inc"
+#include "admin\timers\impl"
 
-#include "player\connection\impl.inc"
-#include "player\dialog_help\impl.inc"
-#include "player\login\impl.inc"
-#include "player\register\impl.inc"
+#include "player\connection\impl"
+#include "player\dialog_help\impl"
+#include "player\login\impl"
+#include "player\register\impl"
 
 timer minconnecttime[60000]()
 {
