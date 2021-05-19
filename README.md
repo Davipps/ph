@@ -5,7 +5,7 @@ Servidor modalidad Roleplay creado sin base.
 * SA-MP 0.3.7-R2 Windows Server (http://files.sa-mp.com/samp037_svr_R2-1-1_win32.zip)
 * Pawn Compiler (https://github.com/pawn-lang/compiler)
 * Pawn stdlib (https://github.com/pawn-lang/pawn-stdlib)
-* SA-MP stdlib (pawn-lang/samp-stdlib)
+* SA-MP stdlib ((https://github.com/pawn-lang/samp-stdlib)
 * crashdetect (https://github.com/Zeex/samp-plugin-crashdetect)
 * streamer (https://github.com/samp-incognito/samp-streamer-plugin)
 * sscanf (https://github.com/maddinat0r/sscanf)
