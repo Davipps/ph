@@ -10,8 +10,7 @@ ShowRegister(playerid)
         if(!response) return Kick(playerid);
 
         if(strlen(inputtext) < MIN_PASS_LENGTH || strlen(inputtext) > MAX_PASS_LENGTH) return Dialog_ShowCallback(playerid, using inline Register, DIALOG_STYLE_PASSWORD, "REGISTRO - CONTRASEÑA (1/3)", "Esta cuenta no esta registrada, ingresa un contraseña para registrate", "Siguiente", "Cerrar");
-        format(PlayerTemp[playerid][tPassword], 24, "%s", inputtext);
-        
+
         new salt[16];
         getRandomText(salt);
         format(PlayerInfo[playerid][pSalt], 16, "%s", salt);

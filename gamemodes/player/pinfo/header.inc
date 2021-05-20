@@ -1,11 +1,3 @@
-enum e_pStatus
-{
-	sNone,
-	sConnected,
-	sDead,
-	sSpawned
-};
-
 enum e_Gender
 {
 	gMale,
@@ -21,17 +13,11 @@ enum e_PlayerInfo
 	pEmail[32],
 	pAdmin,
 	e_Gender:pGender,
-	e_pStatus:pStatus,
 	pSkin,
 	pLevel,
 	Float:pExp,
+	Float:pHealth,
 	Float:pHungry,
 	Float:pThirst,
 };
 new PlayerInfo[MAX_PLAYERS][e_PlayerInfo];
-
-enum e_PlayerTemp
-{
-	tPassword[65],
-};
-new PlayerTemp[MAX_PLAYERS][e_PlayerTemp];

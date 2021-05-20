@@ -20,9 +20,6 @@
 		"mode": "server",
 		"echo": "-",
 		"gamemodes": ["main"],
-		"filterscripts": [
-			""
-		],
 		"rcon_password": "password",
 		"port": 7777,
 		"hostname": "SA-MP Server",

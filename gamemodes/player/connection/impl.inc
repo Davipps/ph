@@ -2,7 +2,7 @@
 
 hook OnPlayerConnect(playerid)
 {
-	PlayerInfo[playerid][pStatus] = sConnected;
+	PlayerTemp[playerid][tStatus] = sConnected;
 	GetPlayerName(playerid, PlayerInfo[playerid][pName], 24);
 	if(!IsValidName(PlayerInfo[playerid][pName]))
 	{
@@ -14,13 +14,13 @@ hook OnPlayerConnect(playerid)
 
 hook OnPlayerRequestSpawn(playerid)
 {
-	if(PlayerInfo[playerid][pStatus] == sConnected) CallLocalFunction("OnPlayerRequestClass", "dd", playerid, 0);
+	if(PlayerTemp[playerid][tStatus] == sConnected) CallLocalFunction("OnPlayerRequestClass", "dd", playerid, 0);
 	return 0;
 }
 
 hook OnPlayerRequestClass(playerid, classid)
 {
-	if(PlayerInfo[playerid][pStatus] == sConnected)
+	if(PlayerTemp[playerid][tStatus] == sConnected)
 	{
 		TogglePlayerSpectating(playerid, true);
 		inline const Checked()
@@ -45,4 +45,10 @@ hook OnPlayerRequestClass(playerid, classid)
 		MySQL_TQueryInline(Handle, using inline Checked, "SELECT id, password, salt FROM `player` WHERE `name` = '%e'",PlayerInfo[playerid][pName]);
 	}
 	return 0;
+}
+
+hook OnPlayerSpawn(playerid)
+{
+	PlayerTemp[playerid][tStatus] = sSpawned;
+	return 1;
 }

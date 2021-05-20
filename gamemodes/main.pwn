@@ -49,12 +49,16 @@
 #include "server\intro\header"
 #include "server\vehinfo\header"
 #include "server\worldtime\header"
+#include "server\textdraws\login\header"
+#include "server\textdraws\logo\header"
 
 //-- player
 #include "player\pinfo\header"
+#include "player\ptemp\header"
 #include "player\dialog_help\header"
 #include "player\login\header"
 #include "player\register\header"
+#include "player\hungry_thirst\header"
 
 //FUNCS
 
@@ -65,11 +69,14 @@
 //-- player
 #include "player\register\funcs"
 #include "player\login\funcs"
+#include "player\hungry_thirst\funcs"
 
 //IMPLS
 
 #include "server\db\impl"
 #include "server\worldtime\impl"
+#include "server\textdraws\login\impl"
+#include "server\textdraws\logo\impl"
 #include "server\commands\impl"
 
 #include "dev\commands\impl"
@@ -80,6 +87,7 @@
 #include "player\dialog_help\impl"
 #include "player\login\impl"
 #include "player\register\impl"
+#include "player\hungry_thirst\impl"
 
 timer minconnecttime[60000]()
 {
@@ -112,5 +120,5 @@ public OnGameModeInit()
 
 main()
 {
-	print("Gamemode inciado corretamente");
+	print("Gamemode inciado corretamente ");
 }
