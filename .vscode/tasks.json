@@ -4,8 +4,8 @@
     "tasks": [
         {
             "label": "build samp sever",
-            "command": "${workspaceFolder}/pawno/pawncc.exe",
-			"args": ["main.pwn","-Dgamemodes"],
+            "command": "${workspaceFolder}\\pawno\\pawncc.exe",
+			"args": ["${workspaceFolder}\\gamemodes\\main.pwn"],
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -21,7 +21,7 @@
     },
     "problemMatcher":{
         "base": "$msCompile",
-        "fileLocation": ["autoDetect","${fileDirname}"],
+        //"fileLocation": ["autoDetect","${fileDirname}"],
         "applyTo": "allDocuments",
         "pattern": {
             "regexp": "^(.*)[(](\\d+|\\d+ -- (\\d+))[)] : (fatal error|error|warning) (\\d+): (.*)$",
