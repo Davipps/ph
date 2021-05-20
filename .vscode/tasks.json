@@ -3,9 +3,24 @@
     "type": "shell",
     "tasks": [
         {
+            "options": {
+                "cwd": "${workspaceFolder}\\gamemodes"
+            },
             "label": "build samp sever",
             "command": "${workspaceFolder}\\pawno\\pawncc.exe",
 			"args": ["${workspaceFolder}\\gamemodes\\main.pwn"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "label": "build pawn",
+            "command": "${workspaceFolder}\\pawno\\pawncc.exe",
+            "args":["${fileBasename}"],
             "group": {
                 "kind": "build",
                 "isDefault": true
