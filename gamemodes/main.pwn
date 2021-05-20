@@ -51,6 +51,8 @@
 #include "server\worldtime\header"
 #include "server\textdraws\login\header"
 #include "server\textdraws\logo\header"
+#include "server\items\header.inc"
+#include "server\dropitems\header.inc"
 
 //-- player
 #include "player\pinfo\header"
@@ -71,8 +73,14 @@
 #include "player\login\funcs"
 #include "player\hungry_thirst\funcs"
 
+//-- drop items
+#include "server\dropitems\funcs.inc"
+
 //IMPLS
 
+#include "server\db\impl.inc"
+#include "server\worldtime\impl.inc"
+#include "server\dropitems\impl.inc"
 #include "server\db\impl"
 #include "server\worldtime\impl"
 #include "server\textdraws\login\impl"
