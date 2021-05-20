@@ -17,8 +17,6 @@ enum e_PlayerInfo
 	pLevel,
 	Float:pExp,
 	Float:pHealth,
-	pAreaCrew,
-	pAreaItem,
 	Float:pHungry,
 	Float:pThirst,
 };
