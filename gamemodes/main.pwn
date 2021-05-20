@@ -43,7 +43,6 @@
 
 //HEADERS
 
-//-- server
 #include "utils\header"
 #include "server\db\header"
 #include "server\intro\header"
@@ -51,10 +50,13 @@
 #include "server\worldtime\header"
 #include "server\textdraws\login\header"
 #include "server\textdraws\logo\header"
-#include "server\items\header.inc"
-#include "server\dropitems\header.inc"
 
-//-- player
+#include "server\items\header"
+#include "server\dropitems\header"
+
+#include "server\interest_points\utils\header"
+#include "server\interest_points\24-7\header"
+
 #include "player\pinfo\header"
 #include "player\ptemp\header"
 #include "player\dialog_help\header"
@@ -64,27 +66,29 @@
 
 //FUNCS
 
-//-- utils
 #include "utils\funcs"
 #include "server\worldtime\funcs"
+#include "server\dropitems\funcs"
+#include "server\interest_points\utils\funcs"
 
-//-- player
 #include "player\register\funcs"
 #include "player\login\funcs"
 #include "player\hungry_thirst\funcs"
 
-//-- drop items
-#include "server\dropitems\funcs.inc"
 
 //IMPLS
 
-#include "server\db\impl.inc"
-#include "server\worldtime\impl.inc"
-#include "server\dropitems\impl.inc"
 #include "server\db\impl"
 #include "server\worldtime\impl"
+#include "server\dropitems\impl"
+#include "server\db\impl"
 #include "server\textdraws\login\impl"
 #include "server\textdraws\logo\impl"
+
+#include "server\interest_points\24-7\impl"
+#include "server\interest_points\utils\impl"//este va de ultimo porque es el que crea todo
+
+
 #include "server\commands\impl"
 
 #include "dev\commands\impl"

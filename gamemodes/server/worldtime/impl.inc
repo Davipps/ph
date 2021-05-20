@@ -24,4 +24,5 @@ task WorldTimeTimer[worldtime_timer_interval]()
 			SetPlayerWeather(i, server_weather);
 		}
 	}
+	return 1;
 }

@@ -1,8 +1,8 @@
 enum e_Gender
 {
 	gMale,
-	gFemale
-}
+	gFemale,
+};
 
 enum e_PlayerInfo
 {
