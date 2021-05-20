@@ -1,5 +1,17 @@
 #define DIALOG_INFO 0
 
+/* Colores RBGA */
+#define WHITE			"{ffffff}"
+#define BLUE			"{0000ff}"
+#define PURPLE			"{cc00ff}"
+#define PINK			"{ff00dd}"
+#define RED				"{ff0000}"
+#define ORANGE			"{ffaa00}"
+#define YELLOW			"{ffff00}"
+#define GREEN			"{00cc00}"
+#define PRIMARY_COLOR	"{00ff00}"
+#define CYAN            "{00ffff}"
+
 new NO_PARAMS[4] = "";
 
 // HOLDING(keys)
@@ -32,8 +44,10 @@ enum _:areaType //Tipos de DynamicAreas del server
 	AREA_TYPE_CREW //para este falta el sistema de clanes XD
 }
 
-enum _:pickupType	//Tipos de pickups del server ud le agrega mas como lo de las tiendas y eso
+enum
 {
-	PICKUP_TYPE_NONE,
-	PICKUP_TYPE_HOUSE
-}
+	PICKUP_TYPE_NONE = 0,
+	PICKUP_TYPE_ENTER_EXIT,
+	PICKUP_TYPE_ATM,
+	PICKUP_TYPE_PROPERTY
+};
