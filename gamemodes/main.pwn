@@ -50,6 +50,7 @@
 #include "server\worldtime\header"
 #include "server\textdraws\login\header"
 #include "server\textdraws\logo\header"
+#include "server\houses\header"
 
 #include "server\items\header"
 #include "server\dropitems\header"
@@ -70,6 +71,7 @@
 #include "server\worldtime\funcs"
 #include "server\dropitems\funcs"
 #include "server\interest_points\utils\funcs"
+#include "server\houses\funcs"
 
 #include "player\register\funcs"
 #include "player\login\funcs"
@@ -79,6 +81,7 @@
 //IMPLS
 
 #include "server\db\impl"
+#include "server\houses\impl"
 #include "server\worldtime\impl"
 #include "server\streamer\impl"
 #include "server\textdraws\login\impl"
