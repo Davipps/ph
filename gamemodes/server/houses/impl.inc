@@ -36,7 +36,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 
             switch(info[0])
             {
-                case PICKUP_TYPE_HOUSE:{
+                case PICKUP_TYPE_PROPERTY:{
                     if(IsValidHouse(info[1])){
                         
                     }
