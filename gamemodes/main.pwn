@@ -80,8 +80,7 @@
 
 #include "server\db\impl"
 #include "server\worldtime\impl"
-#include "server\dropitems\impl"
-#include "server\db\impl"
+#include "server\streamer\impl"
 #include "server\textdraws\login\impl"
 #include "server\textdraws\logo\impl"
 

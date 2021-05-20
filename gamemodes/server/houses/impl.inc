@@ -59,9 +59,3 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
     }
     return 1;
 }
-
-hook OnPlayerPickUpDPickup(playerid, pickupid)
-{
-    PlayerInfo[playerid][pPickup] = pickupid;
-    return 1;
-}
