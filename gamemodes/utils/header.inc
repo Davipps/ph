@@ -31,3 +31,9 @@ enum _:areaType //Tipos de DynamicAreas del server
 	AREA_TYPE_ITEM,
 	AREA_TYPE_CREW //para este falta el sistema de clanes XD
 }
+
+enum _:pickupType	//Tipos de pickups del server ud le agrega mas como lo de las tiendas y eso
+{
+	PICKUP_TYPE_NONE,
+	PICKUP_TYPE_HOUSE
+}
