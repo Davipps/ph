@@ -32,7 +32,7 @@ pawn.lock
 #plugins/
 
 # binaries
-*.exe
+#*.exe
 #*.dll
 #*.so
 *.pdb
