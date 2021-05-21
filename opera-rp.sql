@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 20-05-2021 a las 16:05:46
+-- Tiempo de generación: 21-05-2021 a las 14:17:22
 -- Versión del servidor: 10.5.7-MariaDB
 -- Versión de PHP: 7.4.16
 
@@ -20,23 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `opera-rp`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `player`
---
-
-DROP TABLE IF EXISTS `player`;
-CREATE TABLE IF NOT EXISTS `player` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(24) NOT NULL,
-  `password` varchar(65) NOT NULL,
-  `salt` varchar(16) NOT NULL,
-  `email` varchar(32) NOT NULL,
-  `gender` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -75,22 +58,56 @@ CREATE TABLE IF NOT EXISTS `doors` (
 -- Volcado de datos para la tabla `doors`
 --
 
-INSERT INTO `doors` (`id`, `name`, `type`, `int_freeze`, `int_mapicon`, `int_world`, `int_interior`, `int_posx`, `int_posy`, `int_posz`, `int_posa`, `ext_freeze`, `ext_mapicon`, `ext_world`, `ext_interior`, `ext_posx`, `ext_posy`, `ext_posz`, `ext_posa`, `actorid`) VALUES
-(1, '24/7', 7, 0, -1, 0, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2194.73, 1991.02, 12.2969, 90, -1),
-(2, '24/7', 7, 0, -1, 1, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, -180.966, 1034.82, 19.7422, 90, -1),
-(3, '24/7', 7, 0, -1, 2, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1352.31, -1758.96, 13.5078, 0, -1),
-(4, '24/7', 7, 0, -1, 3, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1833.54, -1842.54, 13.5781, 90, -1),
-(5, '24/7', 7, 0, -1, 4, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2884.69, 2453.87, 11.069, 225, -1),
-(6, '24/7', 7, 0, -1, 5, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2097.62, 2224.08, 11.0234, 180, -1),
-(7, '24/7', 7, 0, -1, 6, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2247.65, 2396.42, 10.8203, 0, -1),
-(8, '24/7', 7, 0, -1, 7, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1315.45, -897.967, 39.5781, 180, -1),
-(9, '24/7', 7, 0, -1, 8, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1000.32, -919.933, 42.3281, 105, -1),
-(10, '24/7', 7, 0, -1, 9, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2452.57, 2064.92, 10.8203, 180, -1),
-(11, '24/7', 7, 0, -1, 10, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2546.5, 1972.4, 10.8203, 180, -1),
-(12, '24/7', 7, 0, -1, 11, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1937.59, 2307.27, 10.8203, 90, -1),
-(13, '24/7', 7, 0, -1, 12, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, -1562.44, -2733.19, 48.7435, 234, -1),
-(14, '24/7', 7, 0, -1, 13, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, -2442.72, 755.317, 35.1719, 180, -1);
-COMMIT;
+INSERT INTO `doors` (`id`, `name`, `type`, `int_freeze`, `int_mapicon`, `int_world`, `int_interior`, `int_posx`, `int_posy`, `int_posz`, `int_posa`, `ext_freeze`, `ext_mapicon`, `ext_world`, `ext_interior`, `ext_posx`, `ext_posy`, `ext_posz`, `ext_posa`, `time_open`, `time_close`, `actorid`) VALUES
+(1, '24/7', 7, 0, -1, 0, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2194.73, 1991.02, 12.2969, 90, 0, 0, -1),
+(2, '24/7', 7, 0, -1, 1, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, -180.966, 1034.82, 19.7422, 90, 0, 0, -1),
+(3, '24/7', 7, 0, -1, 2, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1352.31, -1758.96, 13.5078, 0, 0, 0, -1),
+(4, '24/7', 7, 0, -1, 3, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1833.54, -1842.54, 13.5781, 90, 0, 0, -1),
+(5, '24/7', 7, 0, -1, 4, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2884.69, 2453.87, 11.069, 225, 0, 0, -1),
+(6, '24/7', 7, 0, -1, 5, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2097.62, 2224.08, 11.0234, 180, 0, 0, -1),
+(7, '24/7', 7, 0, -1, 6, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2247.65, 2396.42, 10.8203, 0, 0, 0, -1),
+(8, '24/7', 7, 0, -1, 7, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1315.45, -897.967, 39.5781, 180, 0, 0, -1),
+(9, '24/7', 7, 0, -1, 8, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1000.32, -919.933, 42.3281, 105, 0, 0, -1),
+(10, '24/7', 7, 0, -1, 9, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2452.57, 2064.92, 10.8203, 180, 0, 0, -1),
+(11, '24/7', 7, 0, -1, 10, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 2546.5, 1972.4, 10.8203, 180, 0, 0, -1),
+(12, '24/7', 7, 0, -1, 11, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1937.59, 2307.27, 10.8203, 90, 0, 0, -1),
+(13, '24/7', 7, 0, -1, 12, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, -1562.44, -2733.19, 48.7435, 234, 0, 0, -1),
+(14, '24/7', 7, 0, -1, 13, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, -2442.72, 755.317, 35.1719, 180, 0, 0, -1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `interiors`
+--
+
+DROP TABLE IF EXISTS `interiors`;
+CREATE TABLE IF NOT EXISTS `interiors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
+  `interior_id` int(11) NOT NULL DEFAULT 0,
+  `int_x` float NOT NULL,
+  `int_y` float NOT NULL,
+  `int_z` float NOT NULL,
+  `int_rot` float NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `player`
+--
+
+DROP TABLE IF EXISTS `player`;
+CREATE TABLE IF NOT EXISTS `player` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(24) NOT NULL,
+  `password` varchar(65) NOT NULL,
+  `salt` varchar(16) NOT NULL,
+  `email` varchar(32) NOT NULL,
+  `gender` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -105,13 +122,14 @@ CREATE TABLE IF NOT EXISTS `properties` (
   `lock_door` tinyint(1) NOT NULL DEFAULT 0,
   `price` int(11) NOT NULL DEFAULT 0,
   `world` int(11) NOT NULL DEFAULT 0,
-  `interior` int(11) NOT NULL DEFAULT 0,
+  `interior` int(11) NOT NULL,
   `rot` float NOT NULL,
   `pos_x` float NOT NULL,
   `pos_y` float NOT NULL,
   `pos_z` float NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `owner` (`owner`)
+  KEY `owner` (`owner`),
+  KEY `interior` (`interior`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -122,7 +140,8 @@ CREATE TABLE IF NOT EXISTS `properties` (
 -- Filtros para la tabla `properties`
 --
 ALTER TABLE `properties`
-  ADD CONSTRAINT `properties_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `player` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `properties_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `player` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `properties_ibfk_2` FOREIGN KEY (`interior`) REFERENCES `interiors` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
