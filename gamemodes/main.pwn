@@ -70,6 +70,7 @@
 #include "server\dropitems\funcs"
 #include "server\houses\funcs"
 #include "server\doors\funcs"
+#include "admin\game\funcs"
 
 #include "player\register\funcs"
 #include "player\login\funcs"
@@ -83,6 +84,7 @@
 #include "server\textdraws\login\impl"
 #include "server\textdraws\logo\impl"
 #include "server\doors\impl"
+#include "admin\game\impl"
 
 #include "server\commands\impl"
 
