@@ -40,3 +40,17 @@ SendClientMessageEx(playerid, color, const form[], {Float, _}:...) {
 	format(string, sizeof(string), form, ___(3));
     return (playerid == -1 ? (SendClientMessageToAll(color, string)) : (SendClientMessage(playerid, color, string)) );
 }
+
+SendNotification(playerid, Notif_Type:type, const message[]){
+	new color = -1, string[256 char];
+	switch(type)
+	{
+		case MSG_INFO:strcat(string, "« INFO » "), color = 0x00FF00FF;
+		case MSG_IMPORTANT:strcat(string, "« IMPORTANTE » "), color = 0xFFFF00FF;
+		case MSG_USE:strcat(string, "« USO » "), color = 0x8080FFFF;
+		case MSG_WARNING:strcat(string, "« AVISO » "), color = 0xFF8000FF;
+		case MSG_ERROR:strcat(string, "« ERROR » "), color = 0xFF3300FF;
+	}
+	strcat(string, message);
+	return SendClientMessage(playerid, color, string);
+}
