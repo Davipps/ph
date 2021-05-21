@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 21-05-2021 a las 16:10:15
+-- Tiempo de generación: 21-05-2021 a las 17:28:22
 -- Versión del servidor: 10.5.7-MariaDB
 -- Versión de PHP: 7.4.16
 
@@ -51,8 +51,9 @@ CREATE TABLE IF NOT EXISTS `doors` (
   `time_open` tinyint(4) NOT NULL,
   `time_close` tinyint(4) NOT NULL,
   `actorid` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `doors`
@@ -73,6 +74,47 @@ INSERT INTO `doors` (`id`, `name`, `type`, `int_freeze`, `int_mapicon`, `int_wor
 (12, '24/7', 7, 0, -1, 11, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, 1937.59, 2307.27, 10.8203, 90, 0, 0, -1),
 (13, '24/7', 7, 0, -1, 12, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, -1562.44, -2733.19, 48.7435, 234, 0, 0, -1),
 (14, '24/7', 7, 0, -1, 13, 18, -30.9588, -91.8074, 1003.55, 0, 0, 17, 0, 0, -2442.72, 755.317, 35.1719, 180, 0, 0, -1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `doors_type`
+--
+
+DROP TABLE IF EXISTS `doors_type`;
+CREATE TABLE IF NOT EXISTS `doors_type` (
+  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `doors_type`
+--
+
+INSERT INTO `doors_type` (`id`, `name`) VALUES
+(1, 'Binco'),
+(2, 'SubUrban'),
+(3, 'ProLaps'),
+(4, 'Didier Sachs'),
+(5, 'Victim'),
+(6, 'ZIP'),
+(7, '24/7'),
+(8, 'Well Stacked Pizza'),
+(9, 'Cluckin Bell'),
+(10, 'BurgerShot'),
+(11, 'Bank LS'),
+(12, 'Bank SF'),
+(13, 'Bank LV'),
+(14, 'City Halls LS'),
+(15, 'Unity Station'),
+(16, 'Police LS'),
+(17, 'Police SF'),
+(18, 'Police LV'),
+(19, 'Police Garage'),
+(20, 'Club Alhambra'),
+(21, 'Hostpital'),
+(22, 'Club');
 
 -- --------------------------------------------------------
 
@@ -132,15 +174,14 @@ INSERT INTO `interiors` (`id`, `name`, `interior_id`, `int_x`, `int_y`, `int_z`,
 
 DROP TABLE IF EXISTS `player`;
 CREATE TABLE IF NOT EXISTS `player` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(24) NOT NULL,
-  `password` varchar(65) NOT NULL,
-  `salt` varchar(16) NOT NULL,
-  `email` varchar(32) NOT NULL,
-  `gender` tinyint(1) NOT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(24) NOT NULL,
+  `Password` varchar(65) NOT NULL,
+  `Salt` varchar(16) NOT NULL,
+  `Email` varchar(32) NOT NULL,
+  `Gender` int(11) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -170,10 +211,16 @@ CREATE TABLE IF NOT EXISTS `properties` (
 --
 
 --
+-- Filtros para la tabla `doors`
+--
+ALTER TABLE `doors`
+  ADD CONSTRAINT `doors_ibfk_1` FOREIGN KEY (`type`) REFERENCES `doors_type` (`id`) ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `properties`
 --
 ALTER TABLE `properties`
-  ADD CONSTRAINT `properties_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `player` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `properties_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `player` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `properties_ibfk_2` FOREIGN KEY (`interior`) REFERENCES `interiors` (`id`) ON UPDATE CASCADE;
 COMMIT;
 

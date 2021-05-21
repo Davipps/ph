@@ -66,4 +66,4 @@ enum Notif_Type
 	MSG_USE,
 	MSG_WARNING,
 	MSG_ERROR
-}
+};

@@ -77,7 +77,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
     if(PRESSED(KEY_NO))
     {
-        new pickup = PlayerTemp[playerid][pPickup],
+        new pickup = PlayerTemp[playerid][pt_LastPickupID],
             pickupInt;
         if(pickup && IsValidDynamicPickup( pickup ))
         {
