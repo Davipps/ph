@@ -17,7 +17,26 @@ CMD:v(playerid, params[])
 alias:v("vehicle")
 flags:v(ADMIN_LEVEL_DEVELOPER)
 
-CMD:givemeadmin(playerid, params[])
+CMD:getpos(playerid)
+{
+	new Float:pos[4];
+	GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
+	GetPlayerFacingAngle(playerid, pos[3]);
+	SendClientMessageEx(playerid, -1, "%f, %f, %f, %f", pos[0], pos[1], pos[2], pos[3]);
+	printf("%f, %f, %f, %f", pos[0], pos[1], pos[2], pos[3]);
+	return 1;
+}
+
+CMD:setpos(playerid, params[])
+{
+	new Float:pos[4];
+	if(sscanf(params,"ffff",pos[0], pos[1], pos[2], pos[3])) return SendClientMessage(playerid, -1, "/setpos [posx] [posx] [posz] [angle]");
+	SetPlayerPos(playerid, pos[0], pos[1], pos[2]);
+	SetPlayerFacingAngle(playerid, pos[3]);
+	return 1;
+}
+
+CMD:givemeadmin(playerid)
 {
     PlayerInfo[playerid][pAdmin] = ADMIN_LEVEL_DEVELOPER;
     return 1;
