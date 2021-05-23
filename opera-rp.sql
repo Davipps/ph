@@ -65,6 +65,8 @@ CREATE TABLE IF NOT EXISTS `doors` (
   `ext_posy` float NOT NULL,
   `ext_posz` float NOT NULL,
   `ext_posa` float NOT NULL,
+  `time_open` tinyint(4) NOT NULL,
+  `time_close` tinyint(4) NOT NULL,
   `actorid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
