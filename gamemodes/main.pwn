@@ -53,9 +53,7 @@
 
 #include "server\items\header"
 #include "server\dropitems\header"
-
-#include "server\interest_points\utils\header"
-#include "server\interest_points\24-7\header"
+#include "server\doors\header"
 
 #include "player\pinfo\header"
 #include "player\ptemp\header"
@@ -69,24 +67,19 @@
 #include "utils\funcs"
 #include "server\worldtime\funcs"
 #include "server\dropitems\funcs"
-#include "server\interest_points\utils\funcs"
+#include "server\doors\funcs"
 
 #include "player\register\funcs"
 #include "player\login\funcs"
 #include "player\hungry_thirst\funcs"
 
-
 //IMPLS
-
+#include "streamer\impl"
 #include "server\db\impl"
 #include "server\worldtime\impl"
-#include "server\streamer\impl"
 #include "server\textdraws\login\impl"
 #include "server\textdraws\logo\impl"
-
-#include "server\interest_points\24-7\impl"
-#include "server\interest_points\utils\impl"//este va de ultimo porque es el que crea todo
-
+#include "server\doors\impl"
 
 #include "server\commands\impl"
 

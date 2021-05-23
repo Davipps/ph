@@ -2,11 +2,12 @@
 
 hook OnScriptInit()
 {
-    inline OnLoadHouses()
+    inline OnLoadProperties()
     {
         new count;
         if(cache_get_row_count(count))
         {
+            new bool:isnull_name;
             for(new i = 0; i < count; i++)
             {
                 if(i >= MAX_HOUSES) break;
@@ -15,6 +16,19 @@ hook OnScriptInit()
             }
         }
     }
+    MySQL_TQueryInline(Handle, using inline OnLoadProperties,  
+        "\
+            SELECT \
+                `properties`.*,\
+                `player`.`name` AS `name`\
+            FROM \
+                `properties` \
+            LEFT JOIN \
+                `player` \
+            ON \
+                `properties`.`owner` = `player`.`id`\
+        ",
+    );
     return 1;
 }
 

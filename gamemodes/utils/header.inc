@@ -47,7 +47,7 @@ enum _:areaType //Tipos de DynamicAreas del server
 enum
 {
 	PICKUP_TYPE_NONE = 0,
-	PICKUP_TYPE_ENTER_EXIT,
+	PICKUP_TYPE_DOORS,
 	PICKUP_TYPE_ATM,
 	PICKUP_TYPE_PROPERTY
 };
