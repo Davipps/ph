@@ -6,12 +6,14 @@ enum e_HouseInfo
     h_Id,
     h_PickupId,
     h_Pickup,
-    Text3D:h_Text,
+    Text3D: h_Text,
     h_Interior,
     h_World,
     h_Price,
     h_Owner,
-    bool:h_Sold
+    Float:h_Rot,
+    bool:h_Sold,
+    bool: h_lock, 
     bool:h_Valid
 };
 new House[MAX_HOUSES][e_HouseInfo],

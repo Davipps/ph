@@ -51,3 +51,9 @@ enum
 	PICKUP_TYPE_ATM,
 	PICKUP_TYPE_PROPERTY
 };
+
+enum //Type pickup door
+{
+	pick_TYPE_ENTER,
+	pick_TYPE_EXIT
+};
