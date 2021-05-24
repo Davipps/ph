@@ -2,9 +2,9 @@
 
 hook OnPlayerConnect(playerid)
 {
-	PlayerTemp[playerid][tStatus] = sConnected;
-	GetPlayerName(playerid, PlayerInfo[playerid][pName], 24);
-	if(!IsValidName(PlayerInfo[playerid][pName]))
+	PlayerTemp[playerid][pt_State] = state_CONNECTED;
+	GetPlayerName(playerid, PlayerInfo[playerid][pi_Name], 24);
+	if(!IsValidName(PlayerInfo[playerid][pi_Name]))
 	{
 		ShowDialogInfo(playerid, DIALOG_INFO, "AVISO", "Tu nombre no cumple con el formato: Nombre_Apellido");
 		defer KickTimer(playerid);
@@ -14,13 +14,13 @@ hook OnPlayerConnect(playerid)
 
 hook OnPlayerRequestSpawn(playerid)
 {
-	if(PlayerTemp[playerid][tStatus] == sConnected) CallLocalFunction("OnPlayerRequestClass", "dd", playerid, 0);
+	if(PlayerTemp[playerid][pt_State] == state_CONNECTED) CallLocalFunction("OnPlayerRequestClass", "dd", playerid, 0);
 	return 0;
 }
 
 hook OnPlayerRequestClass(playerid, classid)
 {
-	if(PlayerTemp[playerid][tStatus] == sConnected)
+	if(PlayerTemp[playerid][pt_State] == state_CONNECTED)
 	{
 		TogglePlayerSpectating(playerid, true);
 		inline const Checked()
@@ -30,9 +30,9 @@ hook OnPlayerRequestClass(playerid, classid)
 			{
 				if(rows)
 				{
-					cache_get_value_index_int(0, 0, PlayerInfo[playerid][pID]);
-					cache_get_value_index(0, 1, PlayerInfo[playerid][pPassword]);
-					cache_get_value_index(0, 2, PlayerInfo[playerid][pSalt]);
+					cache_get_value_index_int(0, 0, PlayerInfo[playerid][pi_ID]);
+					cache_get_value_index(0, 1, PlayerInfo[playerid][pi_Password]);
+					cache_get_value_index(0, 2, PlayerInfo[playerid][pi_Salt]);
 					ShowLogin(playerid);
 				}
 				else
@@ -42,13 +42,13 @@ hook OnPlayerRequestClass(playerid, classid)
 				return 1;
 			}
 		}
-		MySQL_TQueryInline(Handle, using inline Checked, "SELECT id, password, salt FROM `player` WHERE `name` = '%e'",PlayerInfo[playerid][pName]);
+		MySQL_TQueryInline(Handle, using inline Checked, "SELECT id, password, salt FROM `player` WHERE `name` = '%e'",PlayerInfo[playerid][pi_Name]);
 	}
 	return 0;
 }
 
 hook OnPlayerSpawn(playerid)
 {
-	PlayerTemp[playerid][tStatus] = sSpawned;
+	PlayerTemp[playerid][pt_State] = state_SPAWNED;
 	return 1;
 }

@@ -6,7 +6,7 @@ RegisterNewPlayer(playerid)
 		new id = cache_insert_id();
 		if(id)
 		{
-			PlayerInfo[playerid][pID] = id;
+			PlayerInfo[playerid][pi_ID] = id;
 		}
 		else Kick(playerid);
 	}
@@ -14,11 +14,11 @@ RegisterNewPlayer(playerid)
 		"\
 			INSERT INTO `player`(`name`, `password`, `salt`, `email`, `gender`) VALUES ('%e','%e','%e','%e',%d)\
 		",
-		PlayerInfo[playerid][pName],
-		PlayerInfo[playerid][pPassword], 
-		PlayerInfo[playerid][pSalt], 
-		PlayerInfo[playerid][pEmail], 
-		PlayerInfo[playerid][pGender]
+		PlayerInfo[playerid][pi_Name],
+		PlayerInfo[playerid][pi_Password], 
+		PlayerInfo[playerid][pi_Salt], 
+		PlayerInfo[playerid][pi_Email], 
+		PlayerInfo[playerid][pi_Gender]
 	);
 	return 1;
 }

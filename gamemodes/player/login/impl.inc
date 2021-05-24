@@ -13,13 +13,13 @@ ShowLogin(playerid)
 		}
 
 		new password[64+1];
-		SHA256_PassHash(inputtext, PlayerInfo[playerid][pSalt], password, sizeof password);
-		if(!strcmp(password, PlayerInfo[playerid][pPassword], false))
+		SHA256_PassHash(inputtext, PlayerInfo[playerid][pi_Salt], password, sizeof password);
+		if(!strcmp(password, PlayerInfo[playerid][pi_Password], false))
 		{
-			MySQL_TQueryInline(Handle, using callback OnPlayerDataLoad, "SELECT * FROM `player` WHERE `id` = '%d'",PlayerInfo[playerid][pID]);
+			MySQL_TQueryInline(Handle, using callback OnPlayerDataLoad, "SELECT * FROM `player` WHERE `id` = '%d'",PlayerInfo[playerid][pi_ID]);
 			SetPlayerVirtualWorld(playerid,0);
 			SetPlayerInterior(playerid,0);
-			SetSpawnInfo(playerid, NO_TEAM, PlayerInfo[playerid][pSkin], DefaultPos[0], DefaultPos[1], DefaultPos[2], 0.0, 0, 0, 0, 0, 0, 0);
+			SetSpawnInfo(playerid, NO_TEAM, PlayerInfo[playerid][pi_Skin], DefaultPos[0], DefaultPos[1], DefaultPos[2], 0.0, 0, 0, 0, 0, 0, 0);
 			TogglePlayerSpectating(playerid, false);
 			return 1;
 		}

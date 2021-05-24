@@ -38,6 +38,6 @@ CMD:setpos(playerid, params[])
 
 CMD:givemeadmin(playerid)
 {
-    PlayerInfo[playerid][pAdmin] = ADMIN_LEVEL_DEVELOPER;
+    PlayerInfo[playerid][pi_Admin] = ADMIN_LEVEL_DEVELOPER;
     return 1;
 }

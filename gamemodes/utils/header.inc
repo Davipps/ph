@@ -55,5 +55,5 @@ enum
 enum //Type pickup door
 {
 	pick_TYPE_ENTER,
-	pick_TYPE_EXIT
+	pick_TYPE_EXIT,
 };

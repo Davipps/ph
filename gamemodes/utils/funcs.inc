@@ -40,3 +40,148 @@ SendClientMessageEx(playerid, color, const form[], {Float, _}:...) {
 	format(string, sizeof(string), form, ___(3));
     return (playerid == -1 ? (SendClientMessageToAll(color, string)) : (SendClientMessage(playerid, color, string)) );
 }
+
+PlayerEnterInterior(playerid)
+{
+	new info[3];
+	
+	new Float:pos[3];
+	Streamer_GetArrayData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_EXTRA_ID, info);
+	if(info[0] == PICKUP_TYPE_NONE) return 0;
+
+	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_X, pos[0]);
+	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_Y, pos[1]);
+	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_Z, pos[2]);
+	
+	if(!IsPlayerInRangeOfPoint(playerid, 1.5, pos[0], pos[1], pos[2])) return 0;
+	
+
+	switch(info[0])
+	{
+		case PICKUP_TYPE_DOORS:
+		{
+			if(info[2] == pick_TYPE_ENTER) // Está en el Pickup Exterior y quiere ir al interior
+			{
+				if(Doors[info[1]][d_TimeOpen] == 0 && Doors[info[1]][d_TimeClose] == 0) // 24 horas
+				{
+					PlayerInfo[playerid][pi_GameState] = state_INTERIOR;
+					PlayerInfo[playerid][pi_InteriorID] = Doors[info[1]][d_ID];
+					PlayerTemp[playerid][pt_InteriorIndex] = info[1];
+					SetPlayerPosEx(playerid, Doors[info[1]][d_IntPos][0], Doors[info[1]][d_IntPos][1], Doors[info[1]][d_IntPos][2], Doors[info[1]][d_IntPos][3], Doors[info[1]][d_IntInterior], Doors[info[1]][d_IntWorld], false, true);
+					FreezePlayer(playerid);
+				}
+				else
+				{
+					if(is_open(GetMyWorldHour(), Doors[info[1]][d_TimeOpen], Doors[info[1]][d_TimeClose]))
+					{
+						PlayerInfo[playerid][pi_GameState] = state_INTERIOR;
+						PlayerInfo[playerid][pi_InteriorID] = Doors[info[1]][d_ID];
+						PlayerTemp[playerid][pt_InteriorIndex] = info[1];
+						SetPlayerPosEx(playerid, Doors[info[1]][d_IntPos][0], Doors[info[1]][d_IntPos][1], Doors[info[1]][d_IntPos][2], Doors[info[1]][d_IntPos][3], Doors[info[1]][d_IntInterior], Doors[info[1]][d_IntWorld], false, true);
+						FreezePlayer(playerid);					
+					}
+					else {
+						if(Doors[info[1]][d_TimeOpen] == -1 && Doors[info[1]][d_TimeOpen] == -1) SendClientMessageEx(playerid, -1, "%s abrirá próximamente.", Doors[info[1]][d_Name]);
+						else SendClientMessageEx(playerid, -1, "%s está cerrado, su horario es: %02d:00h - %02d:00h.", Doors[info[1]][d_Name], Doors[info[1]][d_TimeOpen], Doors[info[1]][d_TimeClose]);
+					}
+				}
+				return 1;
+			}
+			else return 0;
+		}
+		default: return 0;
+	}
+	return 1;
+}
+
+PlayerExitInterior(playerid)
+{
+	new info[3];
+	
+	new Float:pos[3];
+	Streamer_GetArrayData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_EXTRA_ID, info);
+	if(info[0] == PICKUP_TYPE_NONE) return 0;
+
+	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_X, pos[0]);
+	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_Y, pos[1]);
+	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_Z, pos[2]);
+	
+	if(!IsPlayerInRangeOfPoint(playerid, 1.0, pos[0], pos[1], pos[2])) return 0;
+	
+
+	switch(info[0])
+	{
+		case PICKUP_TYPE_DOORS:
+		{
+			if(info[2] == pick_TYPE_EXIT) // Está en el Pickup Exterior y quiere ir al interior
+			{
+				PlayerInfo[playerid][pi_GameState] = state_NORMAL;
+				PlayerInfo[playerid][pi_InteriorID] = 0;
+				PlayerTemp[playerid][pt_InteriorIndex] = -1;
+				SetPlayerPosEx(playerid, Doors[info[1]][d_ExtPos][0], Doors[info[1]][d_ExtPos][1], Doors[info[1]][d_ExtPos][2], Doors[info[1]][d_ExtPos][3], Doors[info[1]][d_ExtInterior], Doors[info[1]][d_ExtWorld], false /*Doors[info[1]][ee_EXT_FREEZE]*/);
+				SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
+				StopAudioStreamForPlayer(playerid);
+				FreezePlayer(playerid);
+				return 1;
+			}
+			else return 0;
+		}
+		default: return 0;
+	}
+	return 1;
+}
+
+SetPlayerPosEx(playerid, Float:x, Float:y, Float:z, Float:angle, interior, world, freeze = 0, addoffset = 0)
+{
+	if(addoffset)
+	{
+		x += (1.5 * floatsin(-angle, degrees));
+		y += (1.5 * floatcos(-angle, degrees));
+	}
+	
+	PlayerInfo[playerid][pi_Pos][0] = x;
+	PlayerInfo[playerid][pi_Pos][1] = y;
+	PlayerInfo[playerid][pi_Pos][2] = z;
+	PlayerInfo[playerid][pi_Pos][3] = angle;
+	
+	SetPlayerPos(playerid, x, y, z);
+	SetPlayerFacingAngle(playerid, angle);
+	SetPlayerInterior(playerid, interior);
+	SetPlayerVirtualWorld(playerid, world);
+	SetCameraBehindPlayer(playerid);
+	
+	if(freeze)
+	{
+		TogglePlayerControllable(playerid, false);
+		defer TogglePlayerControl(playerid, true);
+	}
+	return 1;
+}
+
+FreezePlayer(playerid)
+{
+	TogglePlayerControllable(playerid, false);
+	defer TogglePlayerControl(playerid, true);
+	return 1;
+}
+
+timer TogglePlayerControl[2000](playerid, bool:controlable)
+{
+	return TogglePlayerControllable(playerid, controlable);
+}
+
+is_open(hour, open, close)
+{
+	if(open < 0 || close < 0) return false;
+	if(open > close)
+	{
+		if(((hour >= open) && (hour < 24)) || ((hour >= 0) && (hour < close))) return true;
+		else return false;
+	}
+	else if(open < close)
+	{
+		if((hour >= open) && (hour < close)) return true;
+		else return false;
+	}
+	return false;
+}

@@ -18,7 +18,6 @@ enum
 	type_BANK_LV,
 	type_CITY_HALL_LS,
 	type_UNITY_STATION,
-	type_TRUCK,
 	type_POLICE_LS,
 	type_POLICE_SF,
 	type_POLICE_LV,
@@ -29,37 +28,37 @@ enum
 	type_DRIVING_SCHOOL
 }
 
-enum e_DOORS
+enum e_Doors
 {
-    sd_ID,
-    sd_Name[32],
-    sd_Type,
+    d_ID,
+    d_Name[32],
+    d_Type,
 
     //Datos interior puerta
-    bool:sd_IntFreeze,
-    sd_IntMapIcon,//ID del MapIcon
-    sd_IntMapIconID,//Almacena id del MapIcon creado
-    sd_IntWorld,
-    sd_IntInterior,
-    Float:sd_IntPos[4],
-    Text3D:sd_IntLabelID,
-    sd_IntPickupID,
+    bool:d_IntFreeze,
+    d_IntMapIcon,//ID del MapIcon
+    d_IntMapIconID,//Almacena id del MapIcon creado
+    d_IntWorld,
+    d_IntInterior,
+    Float:d_IntPos[4],
+    Text3D:d_IntLabelID,
+    d_IntPickupID,
    
     //Datos exterior puerta
-    bool:sd_ExtFreeze,
-    sd_ExtMapIcon,//ID del MapIcon
-    sd_ExtMapIconID,//Almacena id del MapIcon creado
-    sd_ExtWorld,
-    sd_ExtInterior,
-    Float:sd_ExtPos[4],
-    Text3D:sd_ExtLabelID,
-    sd_ExtPickupID,
+    bool:d_ExtFreeze,
+    d_ExtMapIcon,//ID del MapIcon
+    d_ExtMapIconID,//Almacena id del MapIcon creado
+    d_ExtWorld,
+    d_ExtInterior,
+    Float:d_ExtPos[4],
+    Text3D:d_ExtLabelID,
+    d_ExtPickupID,
 	
     //Horario ejemplo abierto de 9 a 20 h
     // Coloca 0 para deshabilitar
-    sd_TimeOpen,
-    sd_TimeClose,
+    d_TimeOpen,
+    d_TimeClose,
 
-    sd_Actorid,
+    d_Actorid,
 };
-new Doors[MAX_DOORS][e_DOORS];
+new Doors[MAX_DOORS][e_Doors];

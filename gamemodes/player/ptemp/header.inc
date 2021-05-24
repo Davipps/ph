@@ -1,18 +1,19 @@
-enum e_pStatus
+enum e_pt_Status
 {
-	sNone,
-	sConnected,
-	sDead,
-	sSpawned
+	state_NONE,
+	state_CONNECTED,
+	state_DEAD,
+	state_SPAWNED
 };
 
 enum e_PlayerTemp
 {
-	e_pStatus:tStatus,
-	bool:tHungry_message,
-	bool:tThirst_message,
-	pAreaCrew,
-	pAreaItem,
-	pPickup,
+	e_pt_Status:pt_State,
+	bool:pt_HungryMessage,
+	bool:pt_ThirstMessage,
+	pt_AreaCrew,
+	pt_AreaItem,
+	pt_LastPickupID,
+	pt_InteriorIndex,
 };
 new PlayerTemp[MAX_PLAYERS][e_PlayerTemp];
