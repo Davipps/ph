@@ -42,3 +42,5 @@ hook OnScriptInit()
     MySQL_TQueryInline(Handle, using inline OnInteriorsLoad, "SELECT * FROM `interiors`;");
     return 1;
 }
+
+#include "commands"

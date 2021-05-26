@@ -72,6 +72,7 @@
 #include "server\houses\funcs"
 #include "server\doors\funcs"
 #include "admin\game\funcs"
+#include "server\interiors\funcs"
 
 #include "player\register\funcs"
 #include "player\login\funcs"
