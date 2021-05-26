@@ -50,6 +50,7 @@
 #include "server\worldtime\header"
 #include "server\textdraws\login\header"
 #include "server\textdraws\logo\header"
+#include "server\interiors\header"
 #include "server\houses\header"
 
 #include "server\items\header"
@@ -79,6 +80,7 @@
 //IMPLS
 #include "streamer\impl"
 #include "server\db\impl"
+#include "server\interiors\impl"
 #include "server\houses\impl"
 #include "server\worldtime\impl"
 #include "server\textdraws\login\impl"
