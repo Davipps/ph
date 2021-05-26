@@ -13,6 +13,7 @@
 #define CYAN            "{00ffff}"
 
 new NO_PARAMS[4] = "";
+new bigString[4060];
 
 // HOLDING(keys)
 #define HOLDING(%0) \
