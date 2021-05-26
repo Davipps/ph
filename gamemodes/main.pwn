@@ -52,6 +52,7 @@
 #include "server\textdraws\logo\header"
 #include "server\interiors\header"
 #include "server\houses\header"
+#include "admin\game\header"
 
 #include "server\items\header"
 #include "server\dropitems\header"

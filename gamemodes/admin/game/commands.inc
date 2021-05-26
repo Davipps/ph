@@ -29,3 +29,22 @@ CMD:angle(playerid, params[])
 }
 flags:angle(ADMIN_LEVEL_HELPER)
 alias:angle("rot")
+
+CMD:cmds(playerid, params[])
+{
+    bigString[0] = EOS;
+
+    strcat(bigString, "--- Admin Nivel 1 (HELPER) ---\n\n");
+    strcat(bigString, cmd_Admins[0]);
+    strcat(bigString, "\n\n--- Admin Nivel 2 (MODERADOR) ---\n\n");
+    strcat(bigString, cmd_Admins[1]);
+    strcat(bigString, "\n\n--- Admin Nivel 3 (ADMINISTRADOR) ---\n\n");
+    strcat(bigString, cmd_Admins[2]);
+    strcat(bigString, "\n\n--- Admin Nivel 4 (DESARROLLADOR) ---\n\n");
+    strcat(bigString, cmd_Admins[3]);
+
+    ShowPlayerDialog(playerid, 0, DIALOG_STYLE_MSGBOX, "ADMIN CMDS", bigString, "Aceptar", "");
+    return 1;
+}
+flags:cmds(ADMIN_LEVEL_HELPER)
+alias:cmds("acmds")
