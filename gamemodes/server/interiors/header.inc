@@ -13,3 +13,11 @@ enum e_intInfo
 }
 new Ints[MAX_INTERIORS][e_intInfo],
     TOTAL_INTERIORS;
+
+enum e_intType
+{
+    intType_Id,
+    intType_Name[34]
+};
+new IntType[MAX_INTERIORS][e_intType],
+    TOTAL_INT_TYPES;

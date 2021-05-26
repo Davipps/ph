@@ -2,6 +2,21 @@
 
 hook OnScriptInit()
 {
+    inline const OnInteriorsType()
+    {
+        new count;
+        if(cache_get_row_count(count))
+        {
+            for(new i = 0; i < count; i++)
+            {
+                cache_get_value_name_int(i, "id", IntType[i][intType_Id]);
+                cache_get_value_name(i, "name", IntType[i][intType_Name], 34);
+                TOTAL_INT_TYPES++;
+            }
+        }
+    }
+    MySQL_TQueryInline(Handle, using inline OnInteriorsType, "SELECT * FROM `doors_type`;");
+
     inline const OnInteriorsLoad()
     {
         new count;
@@ -10,6 +25,7 @@ hook OnScriptInit()
             new Float:P[3], bool:isnull_type;
             for(new i = 0; i < count; i++)
             {
+                if(i >= MAX_INTERIORS) break;
                 cache_get_value_name_int(i, "id", Ints[i][int_Id]);
                 cache_get_value_name(i, "name", Ints[i][int_Name]);
                 cache_get_value_name_int(i, "interior_id", Ints[i][int_IntGame]);
