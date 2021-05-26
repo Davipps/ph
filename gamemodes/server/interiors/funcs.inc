@@ -1,4 +1,4 @@
-CreateInterior(playerid, const name[], interior, type, Float:x, Float:y, Float:z, Float:rot)
+stock CreateInterior(playerid, const name[], interior, type, Float:x, Float:y, Float:z, Float:rot)
 {
     inline const OnInsertInterior()
     {
@@ -8,7 +8,7 @@ CreateInterior(playerid, const name[], interior, type, Float:x, Float:y, Float:z
             new id[3];
             id[2] = TOTAL_INTERIORS;
             SetInfoInterior(id[2], insert, type, name, interior, rot);
-            id = CreatePickupInterior(19902, x, y, z, interior);
+            id = CreatePickupInterior(19902, id[2], x, y, z, interior, type);
             Ints[ id[2] ][int_Pickup] = id[0];
             Ints[ id[2] ][int_Text] = Text3D:id[1];
 
@@ -44,15 +44,25 @@ CreateInterior(playerid, const name[], interior, type, Float:x, Float:y, Float:z
     return 1;
 }
 
-CreatePickupInterior(model, Float:x, Float:y, Float:z, interior)
+stock CreatePickupInterior(model, index, Float:x, Float:y, Float:z, interior, type)
 {
     new id[2]; 
     id[0] = CreateDynamicPickup(model, 1, x, y, z-1, -1, interior);
     id[1] = _:CreateDynamic3DTextLabel("N para salir", -1, x, y, z, 6.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, -1, interior);
+
+    new info[3];
+    switch(type)
+    {
+        case 23: info[0] = PICKUP_TYPE_PROPERTY;
+        default: info[0] = PICKUP_TYPE_DOORS;
+    }
+    info[1] = index;
+    info[2] = pick_TYPE_EXIT;
+    Streamer_SetArrayData(STREAMER_TYPE_PICKUP, id[0], E_STREAMER_EXTRA_ID, info);
     return id;
 }
 
-SetInfoInterior(slot, id, type, const name[], interior, Float:rot)
+stock SetInfoInterior(slot, id, type, const name[], interior, Float:rot)
 {
     Ints[ slot ][int_Id] = id;
     Ints[ slot ][int_Type] = type;
@@ -60,29 +70,40 @@ SetInfoInterior(slot, id, type, const name[], interior, Float:rot)
     Ints[ slot ][int_IntGame] = interior;
     Ints[ slot ][int_Rot] = rot;
     Ints[ slot ][int_Valid] = true;
+    return 1;
 }
 
-GetInteriorSlot(int)
+stock GetInteriorSlot(int)
 {
     for(new i = 0; i < TOTAL_INTERIORS; i++) if(Ints[i][int_Id] == int) return i;
     return -1;
 }
 
-EditInterior(playerid, const name[], slot, type, interior, Float:x, Float:y, Float:z, Float:rot)
+stock DeletePickupInterior(slot)
 {
+    DestroyDynamicPickup(Ints[ slot ][int_Pickup]);
+    DestroyDynamic3DTextLabel(Ints[ slot ][int_Text]);
+    return 1;
+}
+
+stock EditInterior(playerid, const name[], slot, type, interior, Float:x, Float:y, Float:z, Float:rot)
+{
+    new stream[2];
+    stream[0] = Ints[ slot ][int_Pickup];
+    stream[1] = _:Ints[ slot ][int_Text];
     inline const OnEditInterior()
     {
         if(cache_affected_rows())
-        {
-            DestroyDynamicPickup(Ints[ slot ][int_Pickup]);
-            DestroyDynamic3DTextLabel(Ints[ slot ][int_Text]);
-
+        {    
             SetInfoInterior(slot, Ints[ slot ][int_Id], type, name, interior, rot);
 
             new id[2];
-            id = CreatePickupInterior(19902, x, y, z, interior);
+            id = CreatePickupInterior(19902, slot, x, y, z, interior, type);
             Ints[ slot ][int_Pickup] = id[0];
             Ints[ slot ][int_Text] = Text3D:id[1];
+
+            DestroyDynamicPickup(stream[0]);
+            DestroyDynamic3DTextLabel(Text3D:stream[1]);
 
             new str[50];
             format(str, 50, "Interior editado exitosamente (id: %d)", Ints[slot][int_Id]);
