@@ -37,8 +37,10 @@ hook OnScriptInit()
                 cache_get_value_name_float(i, "int_z", P[2]);
                 cache_get_value_name_float(i, "int_rot", Ints[i][int_Rot]);
 
-                Ints[i][int_Pickup] = CreateDynamicPickup(19902, 1, P[0], P[1], P[2]-1, -1, Ints[i][int_IntGame]);
-                Ints[i][int_Text] = CreateDynamic3DTextLabel("N para salir", -1, P[0], P[1], P[2], 6.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, -1, Ints[i][int_IntGame]);
+                new id[2];
+                id = CreatePickupInterior(19902, P[0], P[1], P[2], Ints[i][int_IntGame]);
+                Ints[i][int_Pickup] = id[0];
+                Ints[i][int_Text] = Text3D:id[1];
 
                 new info[3];
                 switch(Ints[i][int_Type])

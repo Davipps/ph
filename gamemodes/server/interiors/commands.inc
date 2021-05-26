@@ -2,6 +2,7 @@ CMD:cinterior(playerid, params[])
 {
     new name_int[60];
     if(sscanf(params, "s[60]", name_int)) return SendNotification(playerid, MSG_USE, "/cinterior [name interior]");
+    if(TOTAL_INTERIORS >= MAX_INTERIORS) return SendNotification(playerid, MSG_ERROR, "Maximo de interiores alcanzado");
 
     inline const SelectType(pid, dialogid, response, listitem, string:inputtext[])
 	{
