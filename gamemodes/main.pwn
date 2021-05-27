@@ -68,6 +68,7 @@
 //FUNCS
 
 #include "utils\funcs"
+#include "streamer\funcs"
 #include "server\worldtime\funcs"
 #include "server\dropitems\funcs"
 #include "server\houses\funcs"
