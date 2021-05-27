@@ -1,12 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 24-05-2021 a las 03:13:16
--- Versión del servidor: 10.4.13-MariaDB
--- Versión de PHP: 7.3.21
+-- Tiempo de generaciÃ³n: 26-05-2021 a las 00:47:10
+-- VersiÃ³n del servidor: 10.5.7-MariaDB
+-- VersiÃ³n de PHP: 7.4.16
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db`
+-- Base de datos: `opera-rp`
 --
 
 -- --------------------------------------------------------
@@ -53,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `doors` (
   `actorid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `doors`
@@ -86,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `doors_type` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `doors_type`
@@ -114,7 +115,60 @@ INSERT INTO `doors_type` (`id`, `name`) VALUES
 (19, 'Police Garage'),
 (20, 'Club Alhambra'),
 (21, 'Hostpital'),
-(22, 'Club');
+(22, 'Club'),
+(23, 'House');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `interiors`
+--
+
+DROP TABLE IF EXISTS `interiors`;
+CREATE TABLE IF NOT EXISTS `interiors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  `interior_id` int(11) NOT NULL DEFAULT 0,
+  `type` tinyint(4) DEFAULT NULL,
+  `int_x` float NOT NULL,
+  `int_y` float NOT NULL,
+  `int_z` float NOT NULL,
+  `int_rot` float NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `type` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `interiors`
+--
+
+INSERT INTO `interiors` (`id`, `name`, `interior_id`, `type`, `int_x`, `int_y`, `int_z`, `int_rot`) VALUES
+(1, '24/7 v-1', 17, 7, -25.722, -187.822, 1003.55, 0),
+(2, '24/7 v-2 large', 10, 7, 6.19614, -30.9165, 1003.55, 358.868),
+(3, '24/7 v-3', 18, 7, -30.9647, -91.9342, 1003.55, 0.121947),
+(4, '24/7 v-4', 16, 7, -26.1856, -140.916, 1003.55, 0.121947),
+(5, '24/7 v-5', 4, 7, -27.3827, -30.7948, 1003.56, 4.50833),
+(6, '24/7 v-6', 6, 7, -27.415, -57.5029, 1003.55, 3.25498),
+(7, 'bulglary house 1', 3, 23, 235.268, 1187.28, 1080.26, 359.832),
+(8, 'bulglary house 2', 2, 23, 226.233, 1239.94, 1082.14, 90.0488),
+(9, 'bulglary house 3', 1, 23, 226.775, 1289.93, 1082.13, 88.1688),
+(10, 'bulglary house 4', 5, 23, 226.652, 1114.31, 1080.99, 269.857),
+(11, 'bulglary house 5', 15, 23, 295.089, 1472.75, 1080.26, 0.701092),
+(12, 'bulglary house 6', 2, 23, 447.085, 1397.67, 1084.3, 357.255),
+(13, 'bulglary house 7', 5, 23, 226.863, 1114.27, 1081, 276.054),
+(14, 'bulglary house 8', 4, 23, 261.004, 1284.73, 1080.26, 358.124),
+(15, 'bulglary house 9', 10, 23, 23.9407, 1340.89, 1084.38, 358.461),
+(16, 'bulglary house 10', 4, 23, 221.879, 1141.32, 1082.61, 359.378),
+(17, 'bulglary house 11', 4, 23, -261.207, 1456.62, 1084.37, 93.6684),
+(18, 'bulglary house 12', 5, 23, 22.7225, 1403.98, 1084.43, 5.62086),
+(19, 'bulglary house 13', 5, 23, 140.362, 1366.76, 1083.86, 359.98),
+(20, 'bulglary house 14', 6, 23, 234.223, 1064.27, 1084.21, 358.391),
+(21, 'bulglary house 15', 6, 23, -68.85, 1351.63, 1080.21, 0.920898),
+(22, 'bulglary house 16', 15, 23, -283.727, 1470.95, 1084.38, 94.2718),
+(23, 'bulglary house 17', 8, 23, 2365.24, -1135.35, 1050.88, 2.77763),
+(24, 'bulglary house 18', 8, 23, -42.5468, 1405.94, 1084.43, 0.269795),
+(25, 'bulglary house 19', 9, 23, 83.0557, 1322.48, 1083.87, 1.21095),
+(26, 'bulglary house 20', 9, 23, 260.742, 1238.23, 1084.26, 1.21095);
 
 -- --------------------------------------------------------
 
@@ -131,15 +185,7 @@ CREATE TABLE IF NOT EXISTS `player` (
   `Email` varchar(32) NOT NULL,
   `Gender` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `player`
---
-
-INSERT INTO `player` (`ID`, `Name`, `Password`, `Salt`, `Email`, `Gender`) VALUES
-(1, 'Moises_Gomez', '965CF0EA2DCC276F1DDD5B576CC60BE52E4267BA99E82A0E5C746C44A40BB58D', '0EF71bSUkj5lV86', 'dannyjp49@gmail.com', 0),
-(2, 'Danyon_Joshep', '623969A082A6636A9D1600D176B0E480A67E0D26F02765D905423584D47DF102', '44693dTKk6z5e8k', 'dannyjp48@gmail.com', 0);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -154,13 +200,14 @@ CREATE TABLE IF NOT EXISTS `properties` (
   `lock_door` tinyint(1) NOT NULL DEFAULT 0,
   `price` int(11) NOT NULL DEFAULT 0,
   `world` int(11) NOT NULL DEFAULT 0,
-  `interior` int(11) NOT NULL DEFAULT 0,
+  `interior` int(11) NOT NULL,
   `rot` float NOT NULL,
   `pos_x` float NOT NULL,
   `pos_y` float NOT NULL,
   `pos_z` float NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `owner` (`owner`)
+  KEY `owner` (`owner`),
+  KEY `interior` (`interior`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -171,11 +218,21 @@ CREATE TABLE IF NOT EXISTS `properties` (
 -- Filtros para la tabla `doors`
 --
 ALTER TABLE `doors`
-  ADD CONSTRAINT `doors_ibfk_1` FOREIGN KEY (`type`) REFERENCES `doors_type` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-COMMIT;
+  ADD CONSTRAINT `doors_ibfk_1` FOREIGN KEY (`type`) REFERENCES `doors_type` (`id`) ON UPDATE CASCADE;
 
+--
+-- Filtros para la tabla `interiors`
+--
+ALTER TABLE `interiors`
+  ADD CONSTRAINT `interiors_ibfk_1` FOREIGN KEY (`type`) REFERENCES `doors_type` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `properties`
+--
 ALTER TABLE `properties`
-  ADD CONSTRAINT `properties_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `player` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `properties_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `player` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `properties_ibfk_2` FOREIGN KEY (`interior`) REFERENCES `interiors` (`id`) ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

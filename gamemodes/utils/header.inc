@@ -30,6 +30,7 @@ new NO_PARAMS[4] = "";
 enum
 {
 	ADMIN_LEVEL_NONE,
+	ADMIN_LEVEL_HELPER,
 	ADMIN_LEVEL_MODERATOR,
 	ADMIN_LEVEL_ADMINISTRATOR,
 	ADMIN_LEVEL_DEVELOPER,
@@ -55,5 +56,14 @@ enum
 enum //Type pickup door
 {
 	pick_TYPE_ENTER,
-	pick_TYPE_EXIT,
+	pick_TYPE_EXIT
+};
+
+enum Notif_Type
+{
+	MSG_INFO,
+	MSG_IMPORTANT,
+	MSG_USE,
+	MSG_WARNING,
+	MSG_ERROR
 };

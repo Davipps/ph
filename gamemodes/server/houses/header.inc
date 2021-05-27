@@ -4,8 +4,8 @@
 enum e_HouseInfo
 {
     h_Id,
-    h_PickupId,
-    h_Pickup,
+    h_PickupExt,
+    h_PickupInt,
     Text3D: h_Text,
     h_Interior,
     h_World,
