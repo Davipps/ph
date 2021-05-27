@@ -2,7 +2,7 @@
 
 hook OnScriptInit()
 {
-	SetMyWorldTime(10);
+	SetMyWorldTime(180);
 	return 1;
 }
 
@@ -12,26 +12,22 @@ task WorldTimeTimer[worldtime_timer_interval]()
 	if(server_time[1] == 60)
 	{
 		server_time[0] ++;
-		if(server_time[0] == 24) server_time[0] = 0;
-		server_weather = minrand(0,50);
+		if(server_time[0] == 24) {server_time[0] = 0;server_weather = minrand(1,15);}
 		server_time[1] = 0;
 	}
 
 	foreach(new i : Player)
 	{
-		if(GetPlayerState(i) == PLAYER_STATE_SPAWNED)
+		if(PlayerTemp[i][pt_State] == state_SPAWNED)
 		{
 			SetPlayerTime(i, server_time[0], server_time[1]);
 			SetPlayerWeather(i, server_weather);
 		}
 	}
-	new str[256];
-	format(str,sizeof str,"Hora: %d, Minutos: %d, Clima: %d",GetMyWorldHour(), GetMyWorldMinute(), GetMyWorldWeather());
-	print(str);
 	return 1;
 }
 
-CMD:getttime(playerid)
+CMD:gettime(playerid)
 {
 	new str[256];
 	format(str,sizeof str,"Hora: %d, Minutos: %d, Clima: %d",GetMyWorldHour(), GetMyWorldMinute(), GetMyWorldWeather());
