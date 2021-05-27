@@ -134,3 +134,31 @@ stock EditInterior(playerid, const name[], slot, type, interior, Float:x, Float:
     );
     return 1;
 }
+
+stock DeleteInterior(playerid, slot)
+{
+    inline const OnDeleteInterior()
+    {
+        if(cache_affected_rows())
+        {
+            DeletePickupInterior(slot);
+
+            new str[50];
+            format(str, 50, "Interior borrado exitosamente (id: %d)", Ints[slot][int_Id]);
+            SendNotification(playerid, MSG_INFO, str);
+
+            new tmp[e_intInfo];
+            Ints[slot] = tmp;
+        }
+    }
+    MySQL_TQueryInline(Handle, using inline OnDeleteInterior, 
+        "\
+            DELETE FROM \
+                `interiors` \
+            WHERE \
+                `id`= %d;\
+        ",
+        Ints[slot][int_Id]
+    );
+    return 1;
+}

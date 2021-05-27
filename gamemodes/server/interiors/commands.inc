@@ -61,3 +61,26 @@ CMD:einterior(playerid, params[])
 }
 flags:einterior(ADMIN_LEVEL_DEVELOPER)
 alias:einterior("ei")
+
+CMD:dinterior(playerid, params[])
+{
+    new id;
+    if(sscanf(params, "d", id)) return SendNotification(playerid, MSG_USE, "/dinterior [interior_id]");
+
+    new slot = GetInteriorSlot(id);
+    if(slot == -1) return SendNotification(playerid, MSG_ERROR, "Interior no valido");
+    if(!Ints[slot][int_Valid]) return SendNotification(playerid, MSG_ERROR, "Interior no valido");
+
+    inline const Confirm(pid, dialogid, response, listitem, string:inputtext[])
+    {
+        #pragma unused pid, dialogid, inputtext, listitem
+        if(response)
+        {
+            DeleteInterior(playerid, slot);
+        }
+    }
+    Dialog_ShowCallback(playerid, using inline Confirm, DIALOG_STYLE_LIST, "AVISO", "¿Seguro desea eliminar el interior?\n", "SI", "NO");
+    return 1;
+}
+flags:dinterior(ADMIN_LEVEL_DEVELOPER)
+alias:dinterior("di")
