@@ -38,19 +38,10 @@ hook OnScriptInit()
                 cache_get_value_name_float(i, "int_rot", Ints[i][int_Rot]);
 
                 new id[2];
-                id = CreatePickupInterior(19902, P[0], P[1], P[2], Ints[i][int_IntGame]);
+                id = CreatePickupInterior(19902, i, P[0], P[1], P[2], Ints[i][int_IntGame], Ints[i][int_Type]);
                 Ints[i][int_Pickup] = id[0];
                 Ints[i][int_Text] = Text3D:id[1];
-
-                new info[3];
-                switch(Ints[i][int_Type])
-                {
-                    case 23: info[0] = PICKUP_TYPE_PROPERTY;
-                    default: info[0] = PICKUP_TYPE_DOORS;
-                }
-                info[1] = i;
-                info[2] = pick_TYPE_EXIT;
-                Streamer_SetArrayData(STREAMER_TYPE_PICKUP, Ints[i][int_Pickup], E_STREAMER_EXTRA_ID, info);
+             
                 Ints[i][int_Valid] = true;
                 TOTAL_INTERIORS++;
             }

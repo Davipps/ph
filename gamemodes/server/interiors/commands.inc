@@ -61,3 +61,60 @@ CMD:einterior(playerid, params[])
 }
 flags:einterior(ADMIN_LEVEL_DEVELOPER)
 alias:einterior("ei")
+
+CMD:dinterior(playerid, params[])
+{
+    new id;
+    if(sscanf(params, "d", id)) return SendNotification(playerid, MSG_USE, "/dinterior [interior_id]");
+
+    new slot = GetInteriorSlot(id);
+    if(slot == -1) return SendNotification(playerid, MSG_ERROR, "Interior no valido");
+    if(!Ints[slot][int_Valid]) return SendNotification(playerid, MSG_ERROR, "Interior no valido");
+
+    inline const Confirm(pid, dialogid, response, listitem, string:inputtext[])
+    {
+        #pragma unused pid, dialogid, inputtext, listitem
+        if(response)
+        {
+            DeleteInterior(playerid, slot);
+        }
+    }
+    Dialog_ShowCallback(playerid, using inline Confirm, DIALOG_STYLE_MSGBOX, "AVISO", "¿Seguro desea eliminar el interior?\n", "SI", "NO");
+    return 1;
+}
+flags:dinterior(ADMIN_LEVEL_DEVELOPER)
+alias:dinterior("di")
+
+CMD:irinterior(playerid, params[])
+{
+    bigString[0] = EOS;
+    new str[63];
+    strcat(bigString, "Nombre\t#ID\n");
+    for(new i = 0; i < TOTAL_INTERIORS; i++)
+    {
+        if(!Ints[i][int_Valid])
+        {
+            strcat(bigString, " -\t-\n");
+            continue;
+        }
+        format(str, sizeof(str), "%s\t%d\n", Ints[i][int_Name], Ints[i][int_Id]);
+        strcat(bigString, str);
+    }
+
+    inline const OnGotoInterior(pid, dialogid, response, listitem, string:inputtext[])
+    {
+        #pragma unused pid, dialogid, inputtext
+        if(response)
+        {
+            new Float:P[3];
+            GetDynamicPickupPos(Ints[listitem][int_Pickup], P[0], P[1], P[2]);
+            SetPlayerPos(playerid, P[0], P[1], P[2]+1.2);
+            SetPlayerFacingAngle(playerid, Ints[listitem][int_Rot]);
+            SetPlayerInterior(playerid, Ints[listitem][int_IntGame]);
+        }
+    }
+    Dialog_ShowCallback(playerid, using inline OnGotoInterior, DIALOG_STYLE_TABLIST_HEADERS, "Interiors", bigString, "Ir", "Cancelar");
+    return 1;
+}
+flags:irinterior(ADMIN_LEVEL_DEVELOPER)
+alias:irinterior("ii")
