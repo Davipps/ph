@@ -101,6 +101,7 @@
 #include "player\login\impl"
 #include "player\register\impl"
 #include "player\hungry_thirst\impl"
+#include "player\chat\impl"
 
 timer minconnecttime[60000]()
 {
