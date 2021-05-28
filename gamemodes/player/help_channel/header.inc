@@ -1,0 +1,2 @@
+#define MIN_TIME_BETWEEN_DOUBTS 60
+new pt_LastDoubt[MAX_PLAYERS];

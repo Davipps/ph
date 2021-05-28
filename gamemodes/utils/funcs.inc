@@ -199,3 +199,12 @@ is_open(hour, open, close)
 	}
 	return false;
 }
+
+stock TimeConvert(seconds)
+{
+	new tmp[16];
+ 	new minutes = floatround(seconds/60);
+  	seconds -= minutes*60;
+   	format(tmp, sizeof(tmp), "%d:%02d", minutes, seconds);
+   	return tmp;
+}

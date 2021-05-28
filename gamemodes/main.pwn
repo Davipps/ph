@@ -64,6 +64,7 @@
 #include "player\login\header"
 #include "player\register\header"
 #include "player\hungry_thirst\header"
+#include "player\help_channel\header"
 
 //FUNCS
 
@@ -102,6 +103,7 @@
 #include "player\register\impl"
 #include "player\hungry_thirst\impl"
 #include "player\chat\impl"
+#include "player\help_channel\impl"
 
 timer minconnecttime[60000]()
 {
