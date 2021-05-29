@@ -63,9 +63,7 @@ PlayerEnterInterior(playerid)
 	Streamer_GetArrayData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_EXTRA_ID, info);
 	if(info[0] == PICKUP_TYPE_NONE) return 0;
 
-	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_X, pos[0]);
-	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_Y, pos[1]);
-	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_Z, pos[2]);
+	GetDynamicPickupPos(PlayerTemp[playerid][pt_LastPickupID], pos[0], pos[1], pos[2]);
 	
 	if(!IsPlayerInRangeOfPoint(playerid, 1.5, pos[0], pos[1], pos[2])) return 0;
 	
@@ -81,7 +79,10 @@ PlayerEnterInterior(playerid)
 					PlayerInfo[playerid][pi_GameState] = state_INTERIOR;
 					PlayerInfo[playerid][pi_InteriorID] = Doors[info[1]][d_ID];
 					PlayerTemp[playerid][pt_InteriorIndex] = info[1];
-					SetPlayerPosEx(playerid, Doors[info[1]][d_IntPos][0], Doors[info[1]][d_IntPos][1], Doors[info[1]][d_IntPos][2], Doors[info[1]][d_IntPos][3], Doors[info[1]][d_IntInterior], Doors[info[1]][d_IntWorld], false, true);
+
+					new int = Doors[ info[1] ][d_IntInterior];
+					GetDynamicPickupPos(Ints[int][int_Pickup], pos[0], pos[1], pos[2]);
+					SetPlayerPosEx(playerid, pos[0], pos[1], pos[2]+1.4, Ints[int][int_Rot], Ints[int][int_IntGame], Doors[info[1]][d_IntWorld], false, true);
 					FreezePlayer(playerid);
 				}
 				else
@@ -91,7 +92,10 @@ PlayerEnterInterior(playerid)
 						PlayerInfo[playerid][pi_GameState] = state_INTERIOR;
 						PlayerInfo[playerid][pi_InteriorID] = Doors[info[1]][d_ID];
 						PlayerTemp[playerid][pt_InteriorIndex] = info[1];
-						SetPlayerPosEx(playerid, Doors[info[1]][d_IntPos][0], Doors[info[1]][d_IntPos][1], Doors[info[1]][d_IntPos][2], Doors[info[1]][d_IntPos][3], Doors[info[1]][d_IntInterior], Doors[info[1]][d_IntWorld], false, true);
+						
+						new int = Doors[ info[1] ][d_IntInterior];
+						GetDynamicPickupPos(Ints[int][int_Pickup], pos[0], pos[1], pos[2]);
+						SetPlayerPosEx(playerid, pos[0], pos[1], pos[2]+1.4, Ints[int][int_Rot], Ints[int][int_IntGame], Doors[info[1]][d_IntWorld], false, true);
 						FreezePlayer(playerid);					
 					}
 					else {
@@ -116,11 +120,9 @@ PlayerExitInterior(playerid)
 	Streamer_GetArrayData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_EXTRA_ID, info);
 	if(info[0] == PICKUP_TYPE_NONE) return 0;
 
-	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_X, pos[0]);
-	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_Y, pos[1]);
-	Streamer_GetFloatData(STREAMER_TYPE_PICKUP, PlayerTemp[playerid][pt_LastPickupID], E_STREAMER_Z, pos[2]);
+	GetDynamicPickupPos(PlayerTemp[playerid][pt_LastPickupID], pos[0], pos[1], pos[2]);
 	
-	if(!IsPlayerInRangeOfPoint(playerid, 1.0, pos[0], pos[1], pos[2])) return 0;
+	if(!IsPlayerInRangeOfPoint(playerid, 1.5, pos[0], pos[1], pos[2])) return 0;
 	
 
 	switch(info[0])
@@ -129,10 +131,13 @@ PlayerExitInterior(playerid)
 		{
 			if(info[2] == pick_TYPE_EXIT) // Está en el Pickup Exterior y quiere ir al interior
 			{
+				new id = PlayerTemp[playerid][pt_InteriorIndex];
 				PlayerInfo[playerid][pi_GameState] = state_NORMAL;
 				PlayerInfo[playerid][pi_InteriorID] = 0;
 				PlayerTemp[playerid][pt_InteriorIndex] = -1;
-				SetPlayerPosEx(playerid, Doors[info[1]][d_ExtPos][0], Doors[info[1]][d_ExtPos][1], Doors[info[1]][d_ExtPos][2], Doors[info[1]][d_ExtPos][3], Doors[info[1]][d_ExtInterior], Doors[info[1]][d_ExtWorld], false /*Doors[info[1]][ee_EXT_FREEZE]*/);
+
+				GetDynamicPickupPos(Doors[id][d_ExtPickupID], pos[0], pos[1], pos[2]);
+				SetPlayerPosEx(playerid, pos[0], pos[1], pos[2]+1.4, Doors[id][d_ExtRot], 0, 0, false /*Doors[info[1]][ee_EXT_FREEZE]*/);
 				SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 				StopAudioStreamForPlayer(playerid);
 				FreezePlayer(playerid);
