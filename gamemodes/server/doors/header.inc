@@ -55,6 +55,7 @@ enum e_Doors
     d_TimeClose,
 
     d_Actorid,
+    bool:d_Valid
 };
 new Doors[MAX_DOORS][e_Doors],
     TOTAL_DOORS;
