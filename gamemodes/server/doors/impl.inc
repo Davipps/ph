@@ -51,6 +51,7 @@ hook OnScriptInit()
 				info[1] = i; // Index
 				info[2] = pick_TYPE_ENTER; // Pickup Exterior
 				Streamer_SetArrayData(STREAMER_TYPE_PICKUP, Doors[i][d_ExtPickupID], E_STREAMER_EXTRA_ID, info);
+                Doors[i][d_Valid] = true;
                 TOTAL_DOORS++;	
             }
             printf(" --> doors (slots: %d, usados: %d)", MAX_DOORS, TOTAL_DOORS);
