@@ -1,4 +1,4 @@
-CreateDropItem(itemid, ammon, Float:X, Float:Y, Float:Z, world, interior)
+stock CreateDropItem(itemid, ammon, Float:X, Float:Y, Float:Z, world, interior)
 {
 	//if(!IsValidWeapon(weaponid))return -1;
 	if(ammon <= 0 || itemid >= sizeof(d_Items) || itemid <= 0)return -1;
@@ -17,7 +17,7 @@ CreateDropItem(itemid, ammon, Float:X, Float:Y, Float:Z, world, interior)
 	return a;
 }
 
-GetFreeSlotItemDrop()
+stock GetFreeSlotItemDrop()
 {
 	for(new i = 0; i < TOTAL_DROPS; i++) if(!d_Items[i][dit_valid])return i;
 	if(TOTAL_DROPS == MAX_DROPS_ITEMS)return -1;
@@ -26,14 +26,14 @@ GetFreeSlotItemDrop()
 	return id;
 }
 
-IsValidDropItem(itemid)
+stock IsValidDropItem(itemid)
 {
 	if(itemid >= MAX_DROPS_ITEMS)return 0;
 	if(d_Items[itemid][dit_valid] == false)return 0;
 	return 1;
 }
 
-GivePlayerItemDrop(playerid, itemid, bool:destroy = true)
+stock GivePlayerItemDrop(playerid, itemid, bool:destroy = true)
 {
 	if(!IsValidDynamicArea(itemid))return -1;
 	new info[2];
@@ -57,7 +57,7 @@ GivePlayerItemDrop(playerid, itemid, bool:destroy = true)
 	return -1;
 }
 
-PlayerItemDrop(playerid, itemid)
+stock PlayerItemDrop(playerid, itemid)
 {
 	if(IsValidWeapon(itemid)){
 		new ammon,tmp;
@@ -79,7 +79,7 @@ PlayerItemDrop(playerid, itemid)
 	return -1;
 }
 
-DestroyDropItem(itemid)
+stock DestroyDropItem(itemid)
 {
 	if(!IsValidDropItem(itemid))return 0;
 	DestroyDynamicObject(d_Items[itemid][dit_ID]);
