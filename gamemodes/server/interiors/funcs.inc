@@ -162,6 +162,8 @@ stock DeleteInterior(playerid, slot)
 
             new tmp[e_intInfo];
             Ints[slot] = tmp;
+            format(Ints[slot][int_Name], 60, "-");
+            if(slot == TOTAL_INTERIORS-1)TOTAL_INTERIORS--;
         }
     }
     MySQL_TQueryInline(Handle, using inline OnDeleteInterior, 
