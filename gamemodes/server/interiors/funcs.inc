@@ -6,13 +6,15 @@ stock CreateInterior(playerid, const name[], interior, type, Float:x, Float:y, F
         if(insert)
         {
             new id[3];
-            id[2] = TOTAL_INTERIORS;
+            id[2] = GetFreeSlotInteriors();
             SetInfoInterior(id[2], insert, type, name, interior, rot);
             id = CreatePickupInterior(19902, id[2], x, y, z, interior, type);
             Ints[ id[2] ][int_Pickup] = id[0];
             Ints[ id[2] ][int_Text] = Text3D:id[1];
 
-            TOTAL_INTERIORS++;
+            mysql_format(Handle, QUERY_BUFFER, sizeof QUERY_BUFFER, "UPDATE `interiors` SET `slot`= %d WHERE `id`= %d;", id[2], insert);
+            mysql_tquery(Handle, QUERY_BUFFER);
+
             new str[50];
             format(str, 50, "Interior guardado exitosamente (id: %d)", insert);
             SendNotification(playerid, MSG_INFO, str);
@@ -77,6 +79,17 @@ stock GetInteriorSlot(int)
 {
     for(new i = 0; i < TOTAL_INTERIORS; i++) if(Ints[i][int_Id] == int) return i;
     return -1;
+}
+
+stock GetFreeSlotInteriors()
+{
+    new id = -1;
+    for(new i = 0; i < TOTAL_INTERIORS; i++)
+    { 
+        if(!Ints[i][int_Valid]) return i;
+    }
+    if(TOTAL_INTERIORS < MAX_INTERIORS) id = TOTAL_INTERIORS++;
+    return id;
 }
 
 stock DeletePickupInterior(slot)
