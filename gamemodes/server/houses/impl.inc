@@ -20,14 +20,9 @@ hook OnScriptInit()
                 cache_get_value_name_float(i, "pos_x", Pos[0]);
                 cache_get_value_name_float(i, "pos_y", Pos[1]);
                 cache_get_value_name_float(i, "pos_z", Pos[2]);
+                cache_get_value_name_int(i, "slot", House[i][h_Interior]);
 
                 House[i][h_PickupExt] = CreateDynamicPickup((House[i][h_Owner] == 0)?(1273):(1272), 1, Pos[0], Pos[1], Pos[2], 0);
-
-                cache_get_value_name_float(i, "int_x", Pos[0]);
-                cache_get_value_name_float(i, "int_y", Pos[1]);
-                cache_get_value_name_float(i, "int_z", Pos[2]);
-                cache_get_value_name_int(i, "interior_id", House[i][h_Interior]);
-                House[i][h_PickupInt] = CreateDynamicPickup(19902, 1, Pos[0], Pos[1], Pos[2], House[i][h_World], House[i][h_Interior]);
 
                 cache_is_value_name_null(i, "name", isnull_name);
                 if(!isnull_name) cache_get_value_name(i, "name", name, MAX_PLAYER_NAME);
@@ -38,13 +33,10 @@ hook OnScriptInit()
                 info[2] = pick_TYPE_ENTER;
                 Streamer_SetArrayData(STREAMER_TYPE_PICKUP, House[i][h_PickupExt], E_STREAMER_EXTRA_ID, info);
 
-                info[2] = pick_TYPE_EXIT;
-                Streamer_SetArrayData(STREAMER_TYPE_PICKUP, House[i][h_PickupInt], E_STREAMER_EXTRA_ID, info);
-
                 House[i][h_Valid] = true;
                 TOTAL_HOUSES++;
             }
-            printf(" --> properties(slots: %d, usados: %d)", MAX_HOUSES, TOTAL_HOUSES);
+            printf(" --> properties (slots: %d, usados: %d)", MAX_HOUSES, TOTAL_HOUSES);
         }
     }
     MySQL_TQueryInline(Handle, using inline OnLoadProperties,  
@@ -56,13 +48,13 @@ hook OnScriptInit()
             FROM \
                 `properties` \
             LEFT JOIN \
-                `player` \
-            ON \
-                `properties`.`owner` = `player`.`id` \
-            LEFT JOIN \
                 `interiors` \
             ON \
-                `properties`.`interior` = `interiors`.`id`\
+                `properties`.`interior` = `interiors`.`id` \
+            LEFT JOIN \
+                `player` \
+            ON \
+                `properties`.`owner` = `player`.`id`;\
         "
     );
     return 1;
@@ -73,7 +65,7 @@ hook OnScriptInit()
     esto cambielo y hagalo compatible con el de doors para hacer un solo public
 */
 
-hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+/*hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
     if(PRESSED(KEY_NO))
     {
@@ -120,4 +112,4 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
         }
     }
     return 1;
-}
+}*/
