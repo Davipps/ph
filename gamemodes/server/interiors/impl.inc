@@ -41,6 +41,9 @@ hook OnScriptInit()
                 id = CreatePickupInterior(19902, i, P[0], P[1], P[2], Ints[i][int_IntGame], Ints[i][int_Type]);
                 Ints[i][int_Pickup] = id[0];
                 Ints[i][int_Text] = Text3D:id[1];
+
+                mysql_format(Handle, QUERY_BUFFER, sizeof QUERY_BUFFER, "UPDATE `interiors` SET `slot`= %d WHERE `id`= %d;", i, Ints[i][int_Id]);
+                mysql_tquery(Handle, QUERY_BUFFER);
              
                 Ints[i][int_Valid] = true;
                 TOTAL_INTERIORS++;

@@ -36,11 +36,8 @@ enum e_Doors
 
     //Datos interior puerta
     bool:d_IntFreeze,
-    d_IntMapIcon,//ID del MapIcon
-    d_IntMapIconID,//Almacena id del MapIcon creado
     d_IntWorld,
     d_IntInterior,
-    Float:d_IntPos[4],
     Text3D:d_IntLabelID,
     d_IntPickupID,
    
@@ -48,9 +45,7 @@ enum e_Doors
     bool:d_ExtFreeze,
     d_ExtMapIcon,//ID del MapIcon
     d_ExtMapIconID,//Almacena id del MapIcon creado
-    d_ExtWorld,
-    d_ExtInterior,
-    Float:d_ExtPos[4],
+    Float:d_ExtRot,
     Text3D:d_ExtLabelID,
     d_ExtPickupID,
 	
@@ -60,5 +55,7 @@ enum e_Doors
     d_TimeClose,
 
     d_Actorid,
+    bool:d_Valid
 };
-new Doors[MAX_DOORS][e_Doors];
+new Doors[MAX_DOORS][e_Doors],
+    TOTAL_DOORS;
