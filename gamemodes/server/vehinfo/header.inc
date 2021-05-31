@@ -6,3 +6,4 @@ enum e_VehInfo
 	vDoors,
 }
 new VehInfo[MAX_VEHICLES][e_VehInfo];
+#pragma unused VehInfo

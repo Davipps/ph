@@ -3,6 +3,7 @@ hook OnPlayerText(playerid, text[])
 	if(PlayerTemp[playerid][pt_State] == state_SPAWNED)
 	{
 		new str[256], bool:phone, drunk_level = GetPlayerDrunkLevel(playerid),
+		#pragma unused phone
 		Float:pos[3], current_vw = GetPlayerVirtualWorld(playerid), current_int = GetPlayerInterior(playerid);
 	    GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
 

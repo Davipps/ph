@@ -47,7 +47,7 @@ SendNotification(playerid, Notif_Type:type, const message[]){
 	{
 		case MSG_INFO:strcat(string, "« INFO » "), color = 0x00FF00FF;
 		case MSG_IMPORTANT:strcat(string, "« IMPORTANTE » "), color = 0xFFFF00FF;
-		case MSG_USE:strcat(string, "« USO » "), color = 0x8080FFFF;
+		case MSG_USAGE:strcat(string, "« USO » "), color = 0x8080FFFF;
 		case MSG_WARNING:strcat(string, "« AVISO » "), color = 0xFF8000FF;
 		case MSG_ERROR:strcat(string, "« ERROR » "), color = 0xFF3300FF;
 	}

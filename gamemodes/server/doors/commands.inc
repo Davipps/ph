@@ -13,7 +13,7 @@ CMD:salir(playerid)
 CMD:cdoor(playerid, params[])
 {
 	new icon, name[32];
-	if(sscanf(params, "ds[32]", icon, name))return SendNotification(playerid, MSG_USE, "/cdoor [icon_id] [name]");
+	if(sscanf(params, "ds[32]", icon, name))return SendNotification(playerid, MSG_USAGE, "/cdoor [icon_id] [name]");
 	if(TOTAL_DOORS >= MAX_DOORS)return SendNotification(playerid, MSG_ERROR, "Maximo de puertas alcanzado");
 
 	bigString[0] = EOS;

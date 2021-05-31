@@ -1,7 +1,7 @@
 CMD:cinterior(playerid, params[])
 {
     new name_int[60];
-    if(sscanf(params, "s[60]", name_int)) return SendNotification(playerid, MSG_USE, "/cinterior [name interior]");
+    if(sscanf(params, "s[60]", name_int)) return SendNotification(playerid, MSG_USAGE, "/cinterior [name interior]");
     if(TOTAL_INTERIORS >= MAX_INTERIORS) return SendNotification(playerid, MSG_ERROR, "Maximo de interiores alcanzado");
 
     inline const SelectType(pid, dialogid, response, listitem, string:inputtext[])
@@ -32,7 +32,7 @@ alias:cinterior("ci")
 CMD:einterior(playerid, params[])
 {
     new id, name[60];
-    if(sscanf(params, "dS()[60]", id, name)) return SendNotification(playerid, MSG_USE, "/einterior [interior_id] [name]");
+    if(sscanf(params, "dS()[60]", id, name)) return SendNotification(playerid, MSG_USAGE, "/einterior [interior_id] [name]");
 
     new slot = GetInteriorSlot(id);
     if(slot == -1) return SendNotification(playerid, MSG_ERROR, "Interior no valido");
@@ -65,7 +65,7 @@ alias:einterior("ei")
 CMD:dinterior(playerid, params[])
 {
     new id;
-    if(sscanf(params, "d", id)) return SendNotification(playerid, MSG_USE, "/dinterior [interior_id]");
+    if(sscanf(params, "d", id)) return SendNotification(playerid, MSG_USAGE, "/dinterior [interior_id]");
 
     new slot = GetInteriorSlot(id);
     if(slot == -1) return SendNotification(playerid, MSG_ERROR, "Interior no valido");

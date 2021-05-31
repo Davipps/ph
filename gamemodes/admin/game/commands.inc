@@ -14,7 +14,7 @@ CMD:tp(playerid, params[])
         SetPlayerPos(playerid, P[0], P[1]+1, P[2]);
         return 1;
     }
-    SendNotification(playerid, MSG_USE, "/tp [playerid | x y z]");
+    SendNotification(playerid, MSG_USAGE, "/tp [playerid | x y z]");
     return 1;
 }
 flags:tp(ADMIN_LEVEL_HELPER)
@@ -22,7 +22,7 @@ flags:tp(ADMIN_LEVEL_HELPER)
 CMD:angle(playerid, params[])
 {
     new Float:rot[2];
-    if(sscanf(params, "f", rot[0])) return SendNotification(playerid, MSG_USE, "/angle [angle]");
+    if(sscanf(params, "f", rot[0])) return SendNotification(playerid, MSG_USAGE, "/angle [angle]");
     GetPlayerFacingAngle(playerid, rot[1]);
     SetPlayerFacingAngle(playerid, rot[0]+rot[1]);
     return 1;

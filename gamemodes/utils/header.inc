@@ -62,9 +62,12 @@ enum //Type pickup door
 
 enum Notif_Type
 {
+	MSG_ERROR,
 	MSG_INFO,
-	MSG_IMPORTANT,
-	MSG_USE,
+	MSG_ADMIN,
 	MSG_WARNING,
-	MSG_ERROR
+	MSG_IMPORTANT,
+	MSG_USAGE,
+	MSG_TIP,
+	MSG_OTHER
 };
