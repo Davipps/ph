@@ -9,15 +9,15 @@ ShowRegister(playerid)
 		
         if(!response) return Kick(playerid);
 
-        if(strlen(inputtext) < MIN_PASS_LENGTH || strlen(inputtext) > MAX_PASS_LENGTH) return Dialog_ShowCallback(playerid, using inline Register, DIALOG_STYLE_PASSWORD, "REGISTRO - CONTRASEÑA (1/3)", "Esta cuenta no esta registrada, ingresa un contraseña para registrate", "Siguiente", "Cerrar");
+        if(strlen(inputtext) < MIN_PASS_LENGTH || strlen(inputtext) > MAX_PASS_LENGTH) return Dialog_ShowCallback(playerid, using inline Register, DIALOG_STYLE_PASSWORD, ""PRIMARY_COLOR"REGISTRO - CONTRASEÑA (1/3)", ""WHITE"Esta cuenta no esta registrada, ingresa un contraseña para registrate", "Siguiente", "Cerrar");
 
         new salt[16];
         getRandomText(salt);
         format(PlayerInfo[playerid][pi_Salt], 16, "%s", salt);
         SHA256_PassHash(inputtext, PlayerInfo[playerid][pi_Salt], PlayerInfo[playerid][pi_Password], 64 + 1);
-        Dialog_ShowCallback(playerid, using public ShowRegisterEmail<iiiis>, DIALOG_STYLE_INPUT, ""PRIMARY_COLOR"REGISTRO - CORREO (2/3)", "Ingresa una dirección email para esta cuenta.\nEsta servira en caso de que pierdas/olvides tu contraseña,\n no te preocupes no recibiras ningun tipo de SPAM", "Siguiente", "Cerrar");
+        Dialog_ShowCallback(playerid, using public ShowRegisterEmail<iiiis>, DIALOG_STYLE_INPUT, ""PRIMARY_COLOR"REGISTRO - CORREO (2/3)", ""WHITE"Ingresa una dirección email para esta cuenta.\nEsta servira en caso de que pierdas/olvides tu contraseña,\n no te preocupes no recibiras ningun tipo de SPAM", "Siguiente", "Cerrar");
 	}
-	Dialog_ShowCallback(playerid, using inline Register, DIALOG_STYLE_PASSWORD, ""PRIMARY_COLOR"REGISTRO - CONTRASEÑA (1/3)", "Esta cuenta no esta registrada, ingresa un contraseña para registrate", "Siguiente", "Cerrar");
+	Dialog_ShowCallback(playerid, using inline Register, DIALOG_STYLE_PASSWORD, ""PRIMARY_COLOR"REGISTRO - CONTRASEÑA (1/3)", ""WHITE"Esta cuenta no esta registrada, ingresa un contraseña para registrate", "Siguiente", "Cerrar");
     return 1;
 }
 
@@ -29,7 +29,7 @@ public ShowRegisterEmail(playerid, dialogid, response, listitem, string:inputtex
     if(!IsValidEmail(mail))
     {
         SendClientMessage(playerid, -1, "Correo no válido.");
-        Dialog_ShowCallback(playerid, using public ShowRegisterEmail<iiiis>, DIALOG_STYLE_INPUT, ""PRIMARY_COLOR"REGISTRO - CORREO (2/3)", "Ingresa una dirección email para esta cuenta.\nEsta servira en caso de que pierdas/olvides tu contraseña,\n no te preocupes no recibiras ningun tipo de SPAM", "Siguiente", "Cerrar");
+        Dialog_ShowCallback(playerid, using public ShowRegisterEmail<iiiis>, DIALOG_STYLE_INPUT, ""PRIMARY_COLOR"REGISTRO - CORREO (2/3)", ""WHITE"Ingresa una dirección email para esta cuenta.\nEsta servira en caso de que pierdas/olvides tu contraseña,\n no te preocupes no recibiras ningun tipo de SPAM", "Siguiente", "Cerrar");
         return 1;	
     }
 
@@ -41,13 +41,13 @@ public ShowRegisterEmail(playerid, dialogid, response, listitem, string:inputtex
             if(rows)
             {
                 SendClientMessage(playerid, -1, "Ya existe una cuenta con ese correo.");
-                Dialog_ShowCallback(playerid, using public ShowRegisterEmail<iiiis>, DIALOG_STYLE_INPUT, ""PRIMARY_COLOR"REGISTRO - CORREO (2/3)", "Ingresa una dirección email para esta cuenta.\nEsta servira en caso de que pierdas/olvides tu contraseña,\n no te preocupes no recibiras ningun tipo de SPAM", "Siguiente", "Cerrar");
+                Dialog_ShowCallback(playerid, using public ShowRegisterEmail<iiiis>, DIALOG_STYLE_INPUT, ""PRIMARY_COLOR"REGISTRO - CORREO (2/3)", ""WHITE"Ingresa una dirección email para esta cuenta.\nEsta servira en caso de que pierdas/olvides tu contraseña,\n no te preocupes no recibiras ningun tipo de SPAM", "Siguiente", "Cerrar");
                 return 1;
             }
             else
             {
                 format(PlayerInfo[playerid][pi_Email], 32, "%s", mail);
-                Dialog_ShowCallback(playerid, using public ShowRegisterGender<iiiis>, DIALOG_STYLE_LIST, ""PRIMARY_COLOR"REGISTRO - GENERO (2/3)", "Hombre\nMujer", "Siguiente", "Cerrar");
+                Dialog_ShowCallback(playerid, using public ShowRegisterGender<iiiis>, DIALOG_STYLE_LIST, ""PRIMARY_COLOR"REGISTRO - GENERO (2/3)", ""WHITE"Hombre\nMujer", "Siguiente", "Cerrar");
             }
         }
         else Kick(playerid);

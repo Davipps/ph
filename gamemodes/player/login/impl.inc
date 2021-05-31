@@ -29,6 +29,6 @@ ShowLogin(playerid)
 		}
 		return 1;
 	}
-	Dialog_ShowCallback(playerid, using inline Login, DIALOG_STYLE_PASSWORD, ""PRIMARY_COLOR"INICIAR SESIÓN", "Esta cuenta esta registrada, ingresa tu contraseña", "Siguiente", "Cerrar");
+	Dialog_ShowCallback(playerid, using inline Login, DIALOG_STYLE_PASSWORD, ""PRIMARY_COLOR"INICIAR SESIÓN", ""WHITE"Esta cuenta esta registrada, ingresa tu contraseña", "Siguiente", "Cerrar");
 	return 1;
 }
