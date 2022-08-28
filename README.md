@@ -19,7 +19,7 @@ Servidor modalidad Roleplay creado sin base.
 2. Crea las bases de datos
 3. Importa el archivo [opera-rp.sql](opera-rp.sql) a su base de datos correspondiente
 4. Edita la conexión mysql en el archivo [db.ini](db.ini)
-5. Configura **_server.sfg_** si es nesesario
+5. Configura **_server.cfg_** si es nesesario
 6. Ejecuta **_samp-server.exe_**
 
 ## Instalación si usa sampctl
